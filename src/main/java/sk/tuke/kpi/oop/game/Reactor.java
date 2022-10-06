@@ -8,7 +8,6 @@ public class Reactor extends AbstractActor {
 	private int temperature;
 	private int damage;
 	private float multiplier = 1f;
-	private int secMultiplier = 1;
 	private Animation normalAnimation;
 	private Animation damageAnimation = new Animation("sprites/reactor_hot.png", 80, 80, .05f, Animation.PlayMode.LOOP_PINGPONG);
 	private Animation destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
@@ -53,7 +52,8 @@ public class Reactor extends AbstractActor {
 
 
 	private void updateAnimation () {
-		if (this.temperature > 4000 && this.temperature < 6000) {
+		if(this.temperature < 4000) setAnimation(normalAnimation);
+		else if (this.temperature >= 4000 && this.temperature < 6000) {
 			setAnimation(damageAnimation);
 		} else if (this.temperature >= 6000)
 			setAnimation(destroyedAnimation);
@@ -62,12 +62,12 @@ public class Reactor extends AbstractActor {
 
 	public void increaseTemperature(int temperature){
 		if(temperature < 0) return;
-		setTemperature(temperature * this.multiplier);
+		setTemperature(temperature * multiplier);
 	}
 
 	public void decreaseTemperature(int temperature){
 		if(temperature < 0) return;
-		setTemperature(-temperature / this.secMultiplier);
+		setTemperature(this.damage < 50 ? -temperature : this.damage == 100 ? 0 : -temperature/2);
 	}
 
 }
