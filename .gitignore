@@ -3,6 +3,7 @@
 build/
 out/
 
+.editorconfig
 .DS_Store
 Thumbs.db
 
