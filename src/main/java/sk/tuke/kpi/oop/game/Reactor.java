@@ -16,7 +16,7 @@ public class Reactor extends AbstractActor {
 	public Reactor(){
 		this.temperature = 0;
 		this.damage = 0;
-		normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
+		normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.2f, Animation.PlayMode.LOOP_PINGPONG);
 		setAnimation(this.normalAnimation);
 	}
 
@@ -52,9 +52,13 @@ public class Reactor extends AbstractActor {
 
 
 	private void updateAnimation () {
-		if(this.temperature < 4000) setAnimation(normalAnimation);
+		if(this.temperature < 4000) {
+			setAnimation(normalAnimation);
+			normalAnimation.setFrameDuration(.2f - .001f * this.damage);
+		}
 		else if (this.temperature >= 4000 && this.temperature < 6000) {
 			setAnimation(damageAnimation);
+			damageAnimation.setFrameDuration(.1f - .0005f * this.damage);
 		} else if (this.temperature >= 6000)
 			setAnimation(destroyedAnimation);
 	}
