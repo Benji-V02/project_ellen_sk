@@ -13,6 +13,7 @@ public class Reactor extends AbstractActor {
 	private Animation damageAnimation = new Animation("sprites/reactor_hot.png", 80, 80, .05f, Animation.PlayMode.LOOP_PINGPONG);
 	private Animation destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
 	private Animation animationOff;
+	private Animation animeExtinguished;
 	private Light light;
 
 
@@ -22,6 +23,7 @@ public class Reactor extends AbstractActor {
 		this.state = State.OFF;
 		this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.2f, Animation.PlayMode.LOOP_PINGPONG);
 		this.animationOff = new Animation("sprites/reactor.png");
+		this.animeExtinguished = new Animation("sprites/reactor_extinguished.png");
 		setAnimation(this.animationOff);
 	}
 
@@ -37,11 +39,14 @@ public class Reactor extends AbstractActor {
 			this.multiplier = 1.5f;
 		}else if(this.damage > 66) this.multiplier = 2f;
 		else this.multiplier = 1f;
-		if(this.damage == 100) turnOff();
+		if(this.damage == 100) {
+			turnOff();
+			this.state = State.BROKEN;
+		}
 	}
 
 
-	public double getTemperature() {
+	public int getTemperature() {
 		return temperature;
 	}
 
@@ -69,8 +74,12 @@ public class Reactor extends AbstractActor {
 		else if (this.temperature >= 4000 && this.temperature < 6000) {
 			setAnimation(damageAnimation);
 			damageAnimation.setFrameDuration(.1f - .0005f * this.damage);
-		} else if (this.temperature >= 6000)
+		} else if (this.state == State.BROKEN)
 			setAnimation(destroyedAnimation);
+		else if (this.state == State.EXTINGUISHED) {
+			setAnimation(animeExtinguished);
+
+		}
 	}
 
 
@@ -88,6 +97,9 @@ public class Reactor extends AbstractActor {
 	public void repairWith(Hammer hammer){
 		if(hammer == null) return;
 		if(this.damage == 0 || this.damage >= 100) return;
+		int hDamage = this.getDamage();
+		int newTemp = 6000*hDamage/100;
+		if(getTemperature() > newTemp) decreaseTemperature(getTemperature() - newTemp);
 		if(this.getDamage() < 50) setDamage(-getDamage());
 		else setDamage(-50);
 		hammer.use();
@@ -131,7 +143,19 @@ public class Reactor extends AbstractActor {
 	private enum State{
 		ON,
 		OFF,
+		BROKEN,
+		EXTINGUISHED,
 	};
+
+
+	public void extinguishWith(FireExtinguisher extinguisher){
+		if(this.state == State.BROKEN){
+			extinguisher.use();
+			this.state = State.EXTINGUISHED;
+			decreaseTemperature(4000);
+			updateAnimation();
+		}
+	}
 
 }
 

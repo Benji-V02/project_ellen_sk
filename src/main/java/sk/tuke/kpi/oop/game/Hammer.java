@@ -3,26 +3,20 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Hammer extends AbstractActor {
-
-	private Animation anime;
-	private int uses;
+public class Hammer extends BreakableTool {
 
 	public Hammer(){
-		anime = new Animation("sprites/hammer.png");
-		setAnimation(anime);
-		uses = 1;
+		super(1, new Animation("sprites/hammer.png"));
+	}
+
+	public Hammer(int remainingUses){
+		super(remainingUses, new Animation("sprites/hammer.png"));
 	}
 
 	public int getUses() {
-		return uses;
+		return super.getRemainingUses();
 	}
 
-
-	public void use(){
-		this.uses--;
-		if(getUses() == 0) super.getScene().removeActor(this);
-	}
 
 
 }
