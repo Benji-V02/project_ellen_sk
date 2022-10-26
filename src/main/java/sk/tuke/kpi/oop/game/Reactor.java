@@ -1,7 +1,9 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 
 public class Reactor extends AbstractActor {
 
@@ -51,7 +53,7 @@ public class Reactor extends AbstractActor {
 	}
 
 	private void setTemperature(float temperature) {
-		if(this.state == State.OFF) return;
+		if(this.state != State.ON) return;
 		this.temperature += Math.ceil(temperature);
 		if (this.temperature > 2000) {
 			long newDamage = Math.floorDiv((long) (this.temperature - 2000.f), (long) 40.);
@@ -109,13 +111,13 @@ public class Reactor extends AbstractActor {
 		if(getDamage() == 100) return;
 		this.state = State.ON;
 		updateAnimation();
-		this.light.setElectricityFlow(true);
+		if(this.light != null) this.light.setElectricityFlow(true);
 	}
 
 	public void turnOff(){
 		this.state = State.OFF;
 		updateAnimation();
-		this.light.setElectricityFlow(false);
+		if(this.light != null) this.light.setElectricityFlow(false);
 	}
 
 
@@ -155,6 +157,12 @@ public class Reactor extends AbstractActor {
 			decreaseTemperature(4000);
 			updateAnimation();
 		}
+	}
+
+
+	public void addedToScene(Scene scene){
+		super.addedToScene(scene);
+		scene.scheduleAction(new PerpetualReactorHeating(1), this);
 	}
 
 }

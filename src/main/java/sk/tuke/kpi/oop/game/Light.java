@@ -15,12 +15,15 @@ public class Light extends AbstractActor {
 		animeOff = new Animation("sprites/light_off.png");
 		setAnimation(animeOff);
 		this.isActive = false;
+		electricity = false;
 	}
 
 	public void toggle(){
 		this.isActive = !this.isActive;
 		updateAnimation();
 	}
+
+	public boolean getActiveState(){return this.isActive;}
 
 
 	private void updateAnimation(){
@@ -32,6 +35,14 @@ public class Light extends AbstractActor {
 	public void setElectricityFlow(boolean electricity){
 		this.electricity = electricity;
 		updateAnimation();
+	}
+
+	public boolean getElectricityFlow(){return this.electricity;}
+
+
+	public Animation getAnime(int index){
+		if(index == 1) return animeOn;
+		return animeOff;
 	}
 
 }
