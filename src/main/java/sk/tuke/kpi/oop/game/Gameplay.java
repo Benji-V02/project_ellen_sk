@@ -4,6 +4,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
+import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 import sk.tuke.kpi.gamelib.map.MapMarker;
 
@@ -26,5 +27,12 @@ public class Gameplay extends Scenario {
 			new Wait<>(5),
 			new Invoke<>(cooler::turnOn)
 		).scheduleFor(cooler);
+
+		Hammer hammer = new Mjolnir();
+		scene.addActor(hammer, 0, 0);
+		new When<>(
+			() -> reactor.getTemperature() >= 3000,
+			new Invoke<>(() -> reactor.repairWith(hammer))
+		).scheduleFor(reactor);
 	}
 }

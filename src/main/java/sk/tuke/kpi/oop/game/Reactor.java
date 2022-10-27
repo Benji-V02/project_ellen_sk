@@ -5,7 +5,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 
-public class Reactor extends AbstractActor {
+public class Reactor extends AbstractActor implements Switchable{
 
 	private int temperature;
 	private int damage;
@@ -121,7 +121,8 @@ public class Reactor extends AbstractActor {
 	}
 
 
-	public boolean isRunning(){
+
+	public boolean isOn(){
 		if(state == State.ON) return true;
 		return false;
 	}
