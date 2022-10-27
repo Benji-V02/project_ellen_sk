@@ -6,11 +6,11 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public abstract class BreakableTool extends AbstractActor {
 
 	private int remainingUses;
-	private Animation anime;
+
 
 	public BreakableTool(int remainingUses, Animation animation){
 		this.remainingUses = remainingUses;
-		anime = animation;
+		Animation anime = animation;
 		setAnimation(anime);
 	}
 

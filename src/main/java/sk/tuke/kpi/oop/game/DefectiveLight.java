@@ -1,7 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
 import org.jetbrains.annotations.NotNull;
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
@@ -9,7 +8,7 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 public class DefectiveLight extends Light {
 
 	private void randomLight(){
-		if(super.getActiveState() && super.getElectricityFlow()){
+		if(super.isActiveState() && super.isElectricityFlow()){
 			if(Math.random() % 20 == 0){
 				updateAnimation(false);
 			}else updateAnimation(true);

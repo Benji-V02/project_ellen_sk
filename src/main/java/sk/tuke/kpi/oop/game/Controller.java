@@ -5,12 +5,11 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Controller extends AbstractActor {
 	private Reactor reactor;
-	private Animation anime;
 
 	public Controller(Reactor reactor){
 		this.reactor = reactor;
-		this.anime = new Animation("sprites/switch.png");
-		setAnimation(this.anime);
+		Animation anime = new Animation("sprites/switch.png");
+		setAnimation(anime);
 	}
 
 	void toggle(){

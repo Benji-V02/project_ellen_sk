@@ -23,7 +23,7 @@ public class Light extends AbstractActor {
 		updateAnimation();
 	}
 
-	public boolean getActiveState(){return this.isActive;}
+	public boolean isActiveState(){return this.isActive;}
 
 
 	private void updateAnimation(){
@@ -37,7 +37,7 @@ public class Light extends AbstractActor {
 		updateAnimation();
 	}
 
-	public boolean getElectricityFlow(){return this.electricity;}
+	public boolean isElectricityFlow(){return this.electricity;}
 
 
 	public Animation getAnime(int index){
