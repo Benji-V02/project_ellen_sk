@@ -3,13 +3,15 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Computer extends AbstractActor {
+public class Computer extends AbstractActor implements EnergyConsumer{
 
-
-
+	private boolean electricity;
+	private Animation anime;
 	public Computer(){
-		Animation anime = new Animation("sprites/computer.png", 80, 48, .2f, Animation.PlayMode.LOOP_PINGPONG);
+		this.electricity = false;
+		anime = new Animation("sprites/computer.png", 80, 48, .2f, Animation.PlayMode.LOOP_PINGPONG);
 		setAnimation(anime);
+		updateAnimation();
 	}
 
 	public long add(int a, int b){
@@ -26,5 +28,18 @@ public class Computer extends AbstractActor {
 
 	public double sub(float a, float b){
 		return a - b;
+	}
+
+	@Override
+	public void setPowered(boolean electricity) {
+		this.electricity = electricity;
+		updateAnimation();
+	}
+
+	private void updateAnimation(){
+		if(this.electricity)
+			this.anime.play();
+		else
+			this.anime.pause();
 	}
 }

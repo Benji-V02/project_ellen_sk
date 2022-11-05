@@ -7,6 +7,8 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 import sk.tuke.kpi.gamelib.map.MapMarker;
+import sk.tuke.kpi.oop.game.tools.Hammer;
+import sk.tuke.kpi.oop.game.tools.Mjolnir;
 
 import java.util.Map;
 
@@ -34,5 +36,8 @@ public class Gameplay extends Scenario {
 			() -> reactor.getTemperature() >= 3000,
 			new Invoke<>(() -> reactor.repairWith(hammer))
 		).scheduleFor(reactor);
+
+		PowerSwitch pSwitch = new PowerSwitch<Reactor>(reactor);
+		scene.addActor(pSwitch, 60, 60);
 	}
 }

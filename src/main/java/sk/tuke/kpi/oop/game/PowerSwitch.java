@@ -15,12 +15,25 @@ public class PowerSwitch<A extends Switchable> extends AbstractActor {
 
 	void toggle(){
 		if(reactor.isOn()) {
-			reactor.turnOff();
-			getAnimation().setTint(Color.GRAY);
+			switchOff();
 		}
 		else {
-			reactor.turnOn();
-			getAnimation().setTint(Color.WHITE);
+			this.switchOn();
 		}
+	}
+
+
+	public A getDevice(){return this.reactor;}
+
+
+	public void switchOn(){
+		reactor.turnOn();
+		getAnimation().setTint(Color.WHITE);
+	}
+
+
+	public void switchOff(){
+		reactor.turnOff();
+		getAnimation().setTint(Color.GRAY);
 	}
 }

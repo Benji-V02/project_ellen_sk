@@ -4,6 +4,11 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
+import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
+import sk.tuke.kpi.oop.game.tools.Hammer;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Reactor extends AbstractActor implements Switchable{
 
@@ -16,13 +21,14 @@ public class Reactor extends AbstractActor implements Switchable{
 	private Animation destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
 	private Animation animationOff;
 	private Animation animeExtinguished;
-	private Light light;
+	private Set<EnergyConsumer> devices;
 
 
 	public Reactor(){
 		this.temperature = 0;
 		this.damage = 0;
 		this.state = State.OFF;
+		this.devices = new HashSet<>();
 		this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.2f, Animation.PlayMode.LOOP_PINGPONG);
 		this.animationOff = new Animation("sprites/reactor.png");
 		this.animeExtinguished = new Animation("sprites/reactor_extinguished.png");
@@ -107,39 +113,44 @@ public class Reactor extends AbstractActor implements Switchable{
 		hammer.use();
 	}
 
+	@Override
 	public void turnOn(){
 		if(getDamage() == 100) return;
 		this.state = State.ON;
 		updateAnimation();
-		if(this.light != null) this.light.setElectricityFlow(true);
+		for(EnergyConsumer device : this.devices) {
+			device.setPowered(true);
+		}
 	}
 
+	@Override
 	public void turnOff(){
 		this.state = State.OFF;
 		updateAnimation();
-		if(this.light != null) this.light.setElectricityFlow(false);
+		for(EnergyConsumer device : this.devices) {
+			device.setPowered(false);
+		}
 	}
 
 
-
+	@Override
 	public boolean isOn(){
 		if(state == State.ON) return true;
 		return false;
 	}
 
 
-	public void addLight(Light light){
-		if(this.light != null) return;
-		this.light = light;
-		if(this.state == State.ON) this.light.setElectricityFlow(true);
-		else this.light.setElectricityFlow(false);
+	public void addDevice(EnergyConsumer device){
+		this.devices.add(device);
+		if(this.state == State.ON) device.setPowered(true);
+		else device.setPowered(false);
 
 	}
 
 
-	public void removeLight(){
-		this.light.setElectricityFlow(false);
-		this.light = null;
+	public void removeDevice(EnergyConsumer device){
+		device.setPowered(false);
+		this.devices.remove(device);
 	}
 
 

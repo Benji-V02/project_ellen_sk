@@ -3,7 +3,7 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Light extends AbstractActor {
+public class Light extends AbstractActor implements Switchable, EnergyConsumer{
 
 	private Animation animeOff;
 	private Animation animeOn;
@@ -23,7 +23,21 @@ public class Light extends AbstractActor {
 		updateAnimation();
 	}
 
-	public boolean isActiveState(){return this.isActive;}
+
+	@Override
+	public void turnOn() {
+		this.isActive = true;
+		updateAnimation();
+	}
+
+	@Override
+	public void turnOff() {
+		this.isActive = false;
+		updateAnimation();
+	}
+
+	@Override
+	public boolean isOn(){return this.isActive;}
 
 
 	private void updateAnimation(){
@@ -31,8 +45,8 @@ public class Light extends AbstractActor {
 		else setAnimation(animeOff);
 	}
 
-
-	public void setElectricityFlow(boolean electricity){
+	@Override
+	public void setPowered(boolean electricity){
 		this.electricity = electricity;
 		updateAnimation();
 	}
