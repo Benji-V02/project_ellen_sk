@@ -37,7 +37,7 @@ public class Gameplay extends Scenario {
 			new Invoke<>(() -> reactor.repairWith(hammer))
 		).scheduleFor(reactor);
 
-		PowerSwitch pSwitch = new PowerSwitch<Reactor>(reactor);
+		PowerSwitch<Reactor> pSwitch = new PowerSwitch<Reactor>(reactor);
 		scene.addActor(pSwitch, 60, 60);
 	}
 }
