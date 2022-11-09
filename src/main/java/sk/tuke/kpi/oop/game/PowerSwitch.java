@@ -27,12 +27,14 @@ public class PowerSwitch<A extends Switchable> extends AbstractActor {
 
 
 	public void switchOn(){
+		if(reactor == null) return;
 		reactor.turnOn();
 		getAnimation().setTint(Color.WHITE);
 	}
 
 
 	public void switchOff(){
+		if(reactor == null) return;
 		reactor.turnOff();
 		getAnimation().setTint(Color.GRAY);
 	}
