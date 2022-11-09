@@ -18,7 +18,8 @@ public class PerpetualReactorHeating extends AbstractAction<Reactor> {
 	}
 
 	public void execute(float deltaTime){
-		super.getActor().increaseTemperature(this.temp);
+		Reactor reactor = super.getActor();
+		if(reactor != null) reactor.increaseTemperature(this.temp);
 	}
 
 }
