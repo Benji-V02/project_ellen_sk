@@ -34,7 +34,7 @@ public class Gameplay extends Scenario {
 		scene.addActor(hammer, 0, 0);
 		new When<>(
 			() -> reactor.getTemperature() >= 3000,
-			new Invoke<>(() -> reactor.repairWith(hammer))
+			new Invoke<>(() -> hammer.useWith(reactor))
 		).scheduleFor(reactor);
 
 		PowerSwitch<Reactor> pSwitch = new PowerSwitch<>(reactor);
