@@ -2,7 +2,6 @@ package sk.tuke.kpi.oop.game.tools;
 
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.gamelib.graphics.Animation;
 
 
 public abstract class BreakableTool<A extends Actor> extends AbstractActor implements Usable<A> {
@@ -10,10 +9,8 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
 	private int remainingUses;
 
 
-	public BreakableTool(int remainingUses, Animation animation){
+	public BreakableTool(int remainingUses) {
 		this.remainingUses = remainingUses;
-		Animation anime = animation;
-		setAnimation(anime);
 	}
 
 	public void use(){
