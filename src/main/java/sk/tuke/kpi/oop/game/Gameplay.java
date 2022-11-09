@@ -39,5 +39,8 @@ public class Gameplay extends Scenario {
 
 		PowerSwitch<Reactor> pSwitch = new PowerSwitch<>(reactor);
 		scene.addActor(pSwitch, 60, 60);
+		Light dLight = new DefectiveLight();
+		dLight.turnOn();
+		scene.addActor(dLight, 60, 80);
 	}
 }

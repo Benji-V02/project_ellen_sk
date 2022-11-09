@@ -9,17 +9,8 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 public class DefectiveLight extends Light {
 
 	private void randomLight(){
-		if(super.isOn() && super.isElectricityFlow()){
-			if(Math.random() > .6){
-				updateAnimation(false);
-			}else updateAnimation(true);
-		}
-	}
-
-
-	private void updateAnimation(boolean offState){
-		if(offState) setAnimation(super.getAnime(1));
-		else setAnimation(super.getAnime(0));
+			if(Math.random() > .6)
+				super.toggle();
 	}
 
 
