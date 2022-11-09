@@ -15,19 +15,23 @@ public class Computer extends AbstractActor implements EnergyConsumer{
 	}
 
 	public long add(int a, int b){
-		return a + b;
+		if(electricity)return a + b;
+		else return 0;
 	}
 
 	public double add(float a, float b){
-		return a + b;
+		if(electricity)return a + b;
+		else return 0f;
 	}
 
 	public long sub(int a, int b){
-		return a - b;
+		if(electricity)return a - b;
+		else return 0;
 	}
 
 	public double sub(float a, float b){
-		return a - b;
+		if(electricity)return a - b;
+		else return 0f;
 	}
 
 	@Override
