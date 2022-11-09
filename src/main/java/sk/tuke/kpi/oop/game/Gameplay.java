@@ -42,5 +42,6 @@ public class Gameplay extends Scenario {
 		Light dLight = new DefectiveLight();
 		dLight.turnOn();
 		scene.addActor(dLight, 60, 80);
+		reactor.addDevice(dLight);
 	}
 }

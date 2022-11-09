@@ -39,7 +39,7 @@ public class DefectiveLight extends Light implements Repairable{
 		timer.dispose();
 		timer = new ActionSequence<>(
 			new Wait<>(10),
-			new Invoke<DefectiveLight>(this::randomLight)
+			new Loop<>(new Invoke<DefectiveLight>(this::randomLight))
 		).scheduleFor(this);
 		return true;
 	}
