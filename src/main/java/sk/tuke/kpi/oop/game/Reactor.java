@@ -102,15 +102,14 @@ public class Reactor extends AbstractActor implements Switchable{
 	}
 
 
-	public void repairWith(Hammer hammer){
-		if(hammer == null) return;
-		if(this.damage == 0 || this.damage >= 100) return;
+	public boolean repair(){
+		if(this.damage == 0 || this.damage >= 100) return false;
 		int hDamage = this.getDamage();
 		int newTemp = 6000*hDamage/100;
 		if(getTemperature() > newTemp) decreaseTemperature(getTemperature() - newTemp);
 		if(this.getDamage() < 50) setDamage(-getDamage());
 		else setDamage(-50);
-		hammer.use();
+		return true;
 	}
 
 	@Override
@@ -162,13 +161,14 @@ public class Reactor extends AbstractActor implements Switchable{
 	};
 
 
-	public void extinguishWith(FireExtinguisher extinguisher){
+	public boolean extinguish(){
 		if(this.state == State.BROKEN){
-			extinguisher.use();
 			this.state = State.EXTINGUISHED;
 			decreaseTemperature(4000);
 			updateAnimation();
+			return true;
 		}
+		return false;
 	}
 
 
