@@ -5,25 +5,24 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
-public class Reactor extends AbstractActor implements Switchable, Repairable{
+public class Reactor extends AbstractActor implements Switchable, Repairable {
 
 	private int temperature;
 	private int damage;
 	private float multiplier = 1f;
 	private State state;
-	private Animation normalAnimation;
-	private Animation damageAnimation = new Animation("sprites/reactor_hot.png", 80, 80, .05f, Animation.PlayMode.LOOP_PINGPONG);
-	private Animation destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
-	private Animation animationOff;
-	private Animation animeExtinguished;
-	private Set<EnergyConsumer> devices;
+	private final Animation normalAnimation;
+	private final Animation damageAnimation = new Animation("sprites/reactor_hot.png", 80, 80, .05f, Animation.PlayMode.LOOP_PINGPONG);
+	private final Animation destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
+	private final Animation animationOff;
+	private final Animation animeExtinguished;
+	private final Set<EnergyConsumer> devices;
 
 
-	public Reactor(){
+	public Reactor() {
 		this.temperature = 0;
 		this.damage = 0;
 		this.state = State.OFF;
@@ -91,7 +90,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
 
 
 	public void increaseTemperature(int temperature){
-		if(temperature < 0) return;
+		if (temperature < 0 || this.temperature >= 6000) return;
 		setTemperature(temperature * multiplier);
 	}
 
@@ -133,15 +132,13 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
 
 	@Override
 	public boolean isOn(){
-		if(state == State.ON) return true;
-		return false;
+		return state == State.ON;
 	}
 
 
 	public void addDevice(EnergyConsumer device){
 		this.devices.add(device);
-		if(this.state == State.ON) device.setPowered(true);
-		else device.setPowered(false);
+		device.setPowered(this.state == State.ON);
 
 	}
 
@@ -157,7 +154,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
 		OFF,
 		BROKEN,
 		EXTINGUISHED,
-	};
+	}
 
 
 	public boolean extinguish(){

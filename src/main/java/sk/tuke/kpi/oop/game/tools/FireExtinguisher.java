@@ -8,7 +8,8 @@ public class FireExtinguisher extends BreakableTool<Reactor> {
 
 
 	public FireExtinguisher() {
-		super(1, new Animation("sprites/extinguisher.png"));
+		super(1);
+		new Animation("sprites/extinguisher.png").play();
 	}
 
 	@Override
