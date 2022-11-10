@@ -41,11 +41,12 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 
 	private void setDamage(int damage) {
 		this.damage += damage;
-		if(33 <= this.damage && this.damage <= 66){
+		if (33 <= this.damage && this.damage <= 66) {
 			this.multiplier = 1.5f;
-		}else if(this.damage > 66) this.multiplier = 2f;
+		} else if (this.damage > 66) this.multiplier = 2f;
 		else this.multiplier = 1f;
-		if(this.damage == 100) {
+		if (this.damage > 100) this.damage = 100;
+		if (this.damage == 100) {
 			turnOff();
 			this.state = State.BROKEN;
 		}
