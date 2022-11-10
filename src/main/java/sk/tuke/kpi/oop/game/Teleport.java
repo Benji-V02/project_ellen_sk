@@ -7,11 +7,10 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class Teleport extends AbstractActor {
 
 	//TODO: Make reaction with Player
-	private final Animation anime;
 	private Teleport destination;
 
 	public Teleport() {
-		anime = new Animation("sprites/lift.png");
+		new Animation("sprites/lift.png");
 		destination = null;
 	}
 

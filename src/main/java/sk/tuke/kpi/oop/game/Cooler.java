@@ -42,8 +42,12 @@ public class Cooler extends AbstractActor implements Switchable {
 
 	}
 
-	private void updateAnimation(){
-		if(isOn()) anime.play();
+	private void updateAnimation() {
+		if (isOn()) anime.play();
 		else anime.pause();
+	}
+
+	public Reactor getReactor() {
+		return reactor;
 	}
 }

@@ -4,11 +4,8 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
-import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 import sk.tuke.kpi.gamelib.map.MapMarker;
-import sk.tuke.kpi.oop.game.tools.Hammer;
-import sk.tuke.kpi.oop.game.tools.Mjolnir;
 
 import java.util.Map;
 
@@ -30,18 +27,8 @@ public class Gameplay extends Scenario {
 			new Invoke<>(cooler::turnOn)
 		).scheduleFor(cooler);
 
-		Hammer hammer = new Mjolnir();
-		scene.addActor(hammer, 0, 0);
-		new When<>(
-			() -> reactor.getTemperature() >= 3000,
-			new Invoke<>(() -> hammer.useWith(reactor))
-		).scheduleFor(reactor);
 
 		PowerSwitch<Reactor> pSwitch = new PowerSwitch<>(reactor);
 		scene.addActor(pSwitch, 60, 60);
-		Light dLight = new DefectiveLight();
-		dLight.turnOn();
-		scene.addActor(dLight, 60, 80);
-		reactor.addDevice(dLight);
 	}
 }
