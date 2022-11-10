@@ -7,7 +7,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class Teleport extends AbstractActor {
 
 	//TODO: Make reaction with Player
-	private Animation anime;
+	private final Animation anime;
 	private Teleport destination;
 
 	public Teleport() {
@@ -27,7 +27,10 @@ public class Teleport extends AbstractActor {
 
 	public void teleportPlayer(Player player) {
 		if (destination == null || player == null) return;
-		player.setPosition(destination.getPosX(), destination.getPosY());
+		if (player.getPosX() == this.getPosX() && player.getPosY() == this.getPosY()) {
+			player.setPosition(destination.getPosX(), destination.getPosY());
+
+		}
 
 	}
 
