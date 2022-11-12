@@ -7,7 +7,7 @@ public class Wrench extends BreakableTool<DefectiveLight>{
 
 	public Wrench(){
 		super(2);
-		new Animation("sprites/wrench.png").play();
+		setAnimation(new Animation("sprites/wrench.png"));
 	}
 	@Override
 	public void useWith(DefectiveLight actor) {

@@ -30,5 +30,8 @@ public class Gameplay extends Scenario {
 
 		PowerSwitch<Reactor> pSwitch = new PowerSwitch<>(reactor);
 		scene.addActor(pSwitch, 60, 60);
+
+		Helicopter heli = new Helicopter();
+		scene.addActor(heli, 100, 100);
 	}
 }

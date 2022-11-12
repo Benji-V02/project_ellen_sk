@@ -7,12 +7,12 @@ public class Hammer extends BreakableTool<Reactor> {
 
 	public Hammer(){
 		super(1);
-		new Animation("sprites/hammer.png").play();
+		setAnimation(new Animation("sprites/hammer.png"));
 	}
 
 	public Hammer(int remainingUses) {
 		super(remainingUses);
-		new Animation("sprites/hammer.png").play();
+		setAnimation(new Animation("sprites/hammer.png"));
 	}
 
 	public int getUses() {
