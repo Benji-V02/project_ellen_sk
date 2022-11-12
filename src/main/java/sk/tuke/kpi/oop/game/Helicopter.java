@@ -2,6 +2,7 @@ package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.graphics.Point;
@@ -17,8 +18,11 @@ public class Helicopter extends AbstractActor {
 
 
 	private void armageddon() {
-		Point pos = super.getScene().getFirstActorByName("Player").getPosition();
+		Player player = (Player) super.getScene().getFirstActorByName("Player");
+		if (player == null) return;
+		Point pos = player.getPosition();
 		this.setPosition(pos.getX(), pos.getY());
+		if (this.intersects(player)) player.setEnergy(player.getEnergy() - 1);
 
 	}
 
