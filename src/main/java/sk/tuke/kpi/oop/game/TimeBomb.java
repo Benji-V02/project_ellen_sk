@@ -32,6 +32,7 @@ public class TimeBomb extends AbstractActor {
 
 
 	public void activate() {
+		if (this.isActivated()) return;
 		this.activated = true;
 		setAnimation(animeActive);
 		new ActionSequence<>(
