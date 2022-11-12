@@ -96,17 +96,21 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 	}
 
 	public void decreaseTemperature(int temperature){
-		if(temperature < 0) return;
-		setTemperature((this.damage < 50) ? -temperature : (this.damage == 100) ? 0 : -temperature / 2);
+		if (temperature < 0) return;
+		if (this.damage < 50)
+			setTemperature(-temperature);
+		else if (this.damage == 100) {
+		} else setTemperature((-temperature / 2f));
 	}
 
 
-	public boolean repair(){
-		if(this.damage == 0 || this.damage >= 100) return false;
+	public boolean repair() {
+		if (this.damage == 0 || this.damage >= 100) return false;
 		int hDamage = this.getDamage();
-		int newTemp = 6000*hDamage/100;
-		if(getTemperature() > newTemp) decreaseTemperature(getTemperature() - newTemp);
-		if(this.getDamage() < 50) setDamage(-getDamage());
+		int newTemp = 6000 * hDamage / 100;
+		//if(getTemperature() > newTemp) decreaseTemperature(getTemperature() - newTemp);
+		this.temperature = newTemp;
+		if (this.getDamage() < 50) setDamage(-getDamage());
 		else setDamage(-50);
 		return true;
 	}
