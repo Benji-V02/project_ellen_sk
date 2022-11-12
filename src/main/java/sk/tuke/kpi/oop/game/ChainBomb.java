@@ -13,13 +13,16 @@ public class ChainBomb extends TimeBomb {
 		super(time);
 	}
 
+	@Override
 	public void removedFromScene(Scene scene) {
 		Ellipse2D round = new Ellipse2D.Float(this.getPosX() + 8,
-			this.getPosY() + 8, 50f, 50f);
+			this.getPosY() + 8, 500f, 500f);
 		for (Actor bomb : scene.getActors()) {
-			if (!(bomb instanceof ChainBomb)) continue;
-			if (round.contains(bomb.getPosX(), bomb.getPosY(), 16, 16))
-				((ChainBomb) bomb).activate();
+			if (bomb instanceof ChainBomb) {
+				//System.out.println(round.intersects(bomb.getPosX(), bomb.getPosY(), 160, 160));
+				if (round.intersects(bomb.getPosX(), bomb.getPosY(), 160, 160))
+					((ChainBomb) bomb).activate();
+			}
 		}
 	}
 }
