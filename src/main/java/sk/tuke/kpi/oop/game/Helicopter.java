@@ -9,11 +9,12 @@ import sk.tuke.kpi.gamelib.graphics.Point;
 
 public class Helicopter extends AbstractActor {
 
-	private final Animation anime;
+	//private final Animation anime;
 
 	public Helicopter() {
-		anime = new Animation("sprites/heli.png", 64, 64, .005f);
-		setAnimation(anime);
+		//anime = new Animation("sprites/heli.png", 64, 64, .005f);
+		//setAnimation(anime);
+		setAnimation(new Animation("sprites/heli.png", 64, 64, .005f));
 	}
 
 
