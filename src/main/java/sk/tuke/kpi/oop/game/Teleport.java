@@ -10,7 +10,7 @@ public class Teleport extends AbstractActor {
 	private Teleport destination;
 
 	public Teleport() {
-		new Animation("sprites/lift.png");
+		setAnimation(new Animation("sprites/lift.png"));
 		destination = null;
 	}
 
