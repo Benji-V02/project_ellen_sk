@@ -35,16 +35,18 @@ public class Teleport extends AbstractActor {
 		//System.out.println(this.intersects(player));
 		Rectangle2D tp = new Rectangle2D.Float(this.getPosX(), this.getPosY(), this.getWidth(), this.getHeight());
 		//if(this.intersects(player))
-		if (tp.intersects(playerPos))
+		if (tp.intersects(playerPos) && !isPorted)
 			teleportPlayer(player);
-		else this.isPorted = false;
+		else if (!tp.intersects(playerPos)) this.isPorted = false;
 	}
 
 	public Teleport getDestation() {
+		if (destination == null) return null;
 		return destination;
 	}
 
 	public void setDestination(Teleport destinationTeleport) {
+		if (destinationTeleport == null || destinationTeleport == this) return;
 		this.destination = destinationTeleport;
 	}
 
@@ -54,7 +56,8 @@ public class Teleport extends AbstractActor {
 
 	public void teleportPlayer(Player player) {
 		if (destination == null || player == null || isPorted) return;
-		player.setPosition(destination.getPosX(), destination.getPosY());
+		player.setPosition(destination.getPosX() + (destination.getWidth() / 2) - player.getWidth() / 2,
+			destination.getPosY() + (destination.getHeight() / 2) - player.getHeight() / 2);
 		this.destination.setPorted(true);
 	}
 
