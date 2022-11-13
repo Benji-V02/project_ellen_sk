@@ -40,7 +40,7 @@ public class Teleport extends AbstractActor {
 		else if (!tp.intersects(playerPos)) this.isPorted = false;
 	}
 
-	public Teleport getDestation() {
+	public Teleport getDestination() {
 		if (destination == null) return null;
 		return destination;
 	}
