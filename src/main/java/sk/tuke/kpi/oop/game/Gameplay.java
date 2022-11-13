@@ -34,9 +34,9 @@ public class Gameplay extends Scenario {
 		ChainBomb bomb1 = new ChainBomb(3f);
 		ChainBomb bomb2 = new ChainBomb(3f);
 		ChainBomb bomb3 = new ChainBomb(3f);
-		scene.addActor(bomb1, 207, 228);
-		scene.addActor(bomb2, 230, 200);
-		scene.addActor(bomb3, 35, 30);
+		scene.addActor(bomb1, 150, 150);
+		scene.addActor(bomb2, 200, 95);
+		scene.addActor(bomb3, 125, 70);
 		bomb1.activate();
 	}
 }
