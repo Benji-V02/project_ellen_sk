@@ -16,10 +16,16 @@ public class Teleport extends AbstractActor {
 	private Teleport destination;
 	private boolean isPorted;
 
-	public Teleport() {
+
+	public Teleport(Teleport destination) {
+		this.destination = destination;
 		setAnimation(new Animation("sprites/lift.png"));
-		destination = null;
 		isPorted = false;
+	}
+
+	public Teleport() {
+		this(null);
+
 	}
 
 	private void tpTest() {
