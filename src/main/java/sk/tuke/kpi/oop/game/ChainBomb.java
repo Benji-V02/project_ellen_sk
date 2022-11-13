@@ -19,10 +19,9 @@ public class ChainBomb extends TimeBomb {
 		Ellipse2D round = new Ellipse2D.Float(this.getPosX() - 42,
 			this.getPosY() - 42, 108f, 108f);
 		for (Actor bomb : scene.getActors()) {
-			if (bomb instanceof ChainBomb) {
+			if (bomb instanceof ChainBomb && round.intersects(bomb.getPosX(), bomb.getPosY(), 16f, 16f)) {
 				//System.out.println(round.intersects(bomb.getPosX(), bomb.getPosY(), 16, 16));
-				if (round.intersects(bomb.getPosX(), bomb.getPosY(), 16f, 16f))
-					((ChainBomb) bomb).activate();
+				((ChainBomb) bomb).activate();
 			}
 		}
 	}
