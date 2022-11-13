@@ -39,7 +39,7 @@ public class TimeBomb extends AbstractActor {
 			{
 				setAnimation(animeBlown);
 			}),
-			new Wait<>(EXPLOSION_TIME),
+			new Wait<>(EXPLOSION_TIME * 2),
 			new Invoke<>(() ->
 			{
 				super.getScene().removeActor(this);
