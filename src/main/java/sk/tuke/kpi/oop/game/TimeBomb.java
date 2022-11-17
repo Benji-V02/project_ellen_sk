@@ -19,7 +19,7 @@ public class TimeBomb extends AbstractActor {
 		this.time = time;
 		this.activated = false;
 		animeActive = new Animation("sprites/bomb_activated.png", 16, 16, .09f, Animation.PlayMode.LOOP_PINGPONG);
-		animeBlown = new Animation("sprites/small_explosion.png", 32, 32, EXPLOSION_TIME, Animation.PlayMode.ONCE);
+		animeBlown = new Animation("sprites/small_explosion.png", 16, 16, EXPLOSION_TIME, Animation.PlayMode.ONCE);
 		setAnimation(new Animation("sprites/bomb.png"));
 	}
 
@@ -39,7 +39,7 @@ public class TimeBomb extends AbstractActor {
 			{
 				setAnimation(animeBlown);
 			}),
-			new Wait<>(EXPLOSION_TIME * 2),
+			new Wait<>(EXPLOSION_TIME * 8),
 			new Invoke<>(() ->
 			{
 				super.getScene().removeActor(this);
