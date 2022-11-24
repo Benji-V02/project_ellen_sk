@@ -35,7 +35,7 @@ public class Teleport extends AbstractActor {
 		//System.out.println(this.intersects(player));
 		Rectangle2D tp = new Rectangle2D.Float(this.getPosX(), this.getPosY(), this.getWidth(), this.getHeight());
 		//if(this.intersects(player))
-		if (tp.intersects(playerPos) && !isPorted)
+		if (tp.intersects(playerPos) && !isPorted && destination != null)
 			destination.teleportPlayer(player);
 		else if (!tp.intersects(playerPos)) this.isPorted = false;
 	}

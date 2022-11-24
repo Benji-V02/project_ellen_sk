@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game;
+package sk.tuke.kpi.oop.game.scenarios;
 
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
@@ -6,10 +6,14 @@ import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 import sk.tuke.kpi.gamelib.map.MapMarker;
+import sk.tuke.kpi.oop.game.ChainBomb;
+import sk.tuke.kpi.oop.game.Cooler;
+import sk.tuke.kpi.oop.game.PowerSwitch;
+import sk.tuke.kpi.oop.game.Reactor;
 
 import java.util.Map;
 
-public class Gameplay extends Scenario {
+public class TrainingGameplay extends Scenario {
 
 	public void setupPlay(Scene scene) {
 		Map<String, MapMarker> markers = scene.getMap().getMarkers();
