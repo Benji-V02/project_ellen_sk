@@ -1,7 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
 public enum Direction {
-	NONE(0, 0),
 	NORTH(0, 1),
 	NORTH_EAST(1, 1),
 	EAST(1, 0),
@@ -9,7 +8,9 @@ public enum Direction {
 	SOUTH(0, -1),
 	SOUTH_WEST(-1, -1),
 	WEST(-1, 0),
-	NORTH_WEST(-1, 1);
+	NORTH_WEST(-1, 1),
+	NONE(0, 0);
+
 	private final int dx;
 	private final int dy;
 
@@ -18,9 +19,25 @@ public enum Direction {
 		this.dy = dy;
 	}
 
+	public int getDx() {
+		return dx;
+	}
+
+	public int getDy() {
+		return dy;
+	}
+
 	public float getAngle() {
 		//return (float) (Math.tan(dy/dx));
-		switch (this) {
+
+		for (int i = 0; i < Direction.values().length - 1; i++) {
+			if (this == Direction.values()[i]) {
+				return (float) (45 * i);
+			}
+		}
+		return 0f;
+
+		/*switch (this) {
 			case NONE:
 
 			case NORTH:
@@ -40,7 +57,17 @@ public enum Direction {
 			case EAST:
 				return 260f;
 		}
-		return 0f;
+		return 0f;*/
+	}
+
+	public Direction combine(Direction other) {
+		int x = this.dx + other.getDx();
+		int y = this.dy + other.getDy();
+		for (Direction direct : Direction.values()) {
+			if (direct.getDx() == x && direct.getDy() == y)
+				return direct;
+		}
+		return NONE;
 	}
 
 }

@@ -28,6 +28,7 @@ public class Ripley extends AbstractActor implements Movable {
 
 	@Override
 	public void startedMoving(Direction direction) {
+		if (direction.equals(Direction.NONE)) return;
 		anime.setRotation(direction.getAngle());
 		anime.play();
 	}

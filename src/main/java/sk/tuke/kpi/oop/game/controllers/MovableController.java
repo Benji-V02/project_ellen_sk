@@ -33,10 +33,12 @@ public class MovableController implements KeyboardListener {
 	}
 
 
-	private void newDirection(Direction newDirection) {
+	private void newDirection(Direction newDirection, float duration) {
 		lastMove.stop();
-		lastMove = new Move(newDirection);
-		actor.startedMoving(newDirection);
+		lastMove = new Move(newDirection, duration);
+		lastMove.setActor(actor);
+		lastMove.scheduleFor(actor);
+		//actor.startedMoving(newDirection);
 	}
 
 
@@ -44,17 +46,15 @@ public class MovableController implements KeyboardListener {
 	public void keyPressed(Input.@NotNull Key key) {
 		KeyboardListener.super.keyPressed(key);
 		if (keyDirectionMap.containsKey(key))
-			newDirection(keyDirectionMap.get(key));
+			newDirection(keyDirectionMap.get(key), Float.MAX_VALUE);
 	}
 
 
 	@Override
 	public void keyReleased(Input.@NotNull Key key) {
 		KeyboardListener.super.keyPressed(key);
-		if (keyDirectionMap.containsKey(key)) {
-			newDirection(Direction.NONE);
-			actor.stoppedMoving();
-		}
+		if (keyDirectionMap.containsKey(key))
+			newDirection(Direction.NONE, 0f);
 	}
 
 }

@@ -53,7 +53,7 @@ public class Move implements Action<Movable> {
 		}
 		if (timer <= duration && timer > ZERO) {
 			actor.setPosition(
-				actor.getPosX() + (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
+				actor.getPosX() - (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
 				actor.getPosY() + (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
 			);
 		}
