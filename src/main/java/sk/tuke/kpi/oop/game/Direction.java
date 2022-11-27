@@ -2,13 +2,13 @@ package sk.tuke.kpi.oop.game;
 
 public enum Direction {
 	NORTH(0, 1),
-	NORTH_EAST(1, 1),
-	EAST(1, 0),
-	SOUTH_EAST(1, -1),
-	SOUTH(0, -1),
-	SOUTH_WEST(-1, -1),
-	WEST(-1, 0),
 	NORTH_WEST(-1, 1),
+	WEST(-1, 0),
+	SOUTH_WEST(-1, -1),
+	SOUTH(0, -1),
+	SOUTH_EAST(1, -1),
+	EAST(1, 0),
+	NORTH_EAST(1, 1),
 	NONE(0, 0);
 
 	private final int dx;
@@ -36,28 +36,6 @@ public enum Direction {
 			}
 		}
 		return 0f;
-
-		/*switch (this) {
-			case NONE:
-
-			case NORTH:
-				return 0f;
-			case NORTH_EAST:
-				return 305f;
-			case NORTH_WEST:
-				return 45f;
-			case SOUTH:
-				return 180f;
-			case SOUTH_EAST:
-				return 215f;
-			case SOUTH_WEST:
-				return 135f;
-			case WEST:
-				return 90f;
-			case EAST:
-				return 260f;
-		}
-		return 0f;*/
 	}
 
 	public Direction combine(Direction other) {
