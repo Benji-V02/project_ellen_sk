@@ -35,7 +35,7 @@ public class Move implements Action<Movable> {
 
 	@Override
 	public boolean isDone() {
-		if (timer > ZERO && timer <= duration || actor == null) return false;
+		if ((timer > ZERO && timer <= duration) || actor == null) return false;
 		actor.stoppedMoving();
 		return true;
 	}
