@@ -11,4 +11,7 @@ public interface Movable extends Actor {
 
 	default void stoppedMoving() {
 	}
+
+	default void collidedWithWall() {
+	}
 }
