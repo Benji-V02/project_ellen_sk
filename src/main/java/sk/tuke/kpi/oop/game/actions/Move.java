@@ -5,12 +5,12 @@ import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 
-public class Move implements Action<Movable> {
+public class Move<M extends Movable> implements Action<M> {
 
 	private Direction direction;
 	private final float duration;
 	private float timer;
-	private Movable actor;
+	private M actor;
 	protected final static float ZERO = 1e-5f;
 
 	public Move(Direction direction, float duration) {
@@ -24,12 +24,12 @@ public class Move implements Action<Movable> {
 	}
 
 	@Override
-	public @Nullable Movable getActor() {
+	public @Nullable M getActor() {
 		return actor;
 	}
 
 	@Override
-	public void setActor(@Nullable Movable actor) {
+	public void setActor(@Nullable M actor) {
 		this.actor = actor;
 	}
 

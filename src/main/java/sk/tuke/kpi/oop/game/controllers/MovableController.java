@@ -13,7 +13,7 @@ public class MovableController implements KeyboardListener {
 
 	private final Movable actor;
 	private final Map<Input.Key, Direction> keyDirectionMap;
-	private Move lastMove;
+	private Move<Movable> lastMove;
 
 	public MovableController(Movable actor) {
 		this.actor = actor;
@@ -28,14 +28,14 @@ public class MovableController implements KeyboardListener {
 			Map.entry(Input.Key.D, Direction.EAST)
 		);
 
-		lastMove = new Move(Direction.NONE);
+		lastMove = new Move<>(Direction.NONE);
 		lastMove.setActor(this.actor);
 	}
 
 
 	private void newDirection(Direction newDirection, float duration) {
 		lastMove.stop();
-		lastMove = new Move(newDirection, duration);
+		lastMove = new Move<>(newDirection, duration);
 		lastMove.setActor(actor);
 		lastMove.scheduleFor(actor);
 		//actor.startedMoving(newDirection);
