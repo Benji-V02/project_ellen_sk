@@ -13,7 +13,9 @@ public class MovableController implements KeyboardListener {
 
 	private final Movable actor;
 	private final Map<Input.Key, Direction> keyDirectionMap;
+	private final Map<Direction, Direction> oppositeDirection;
 	private Move<Movable> lastMove;
+	private Direction direction;
 
 	public MovableController(Movable actor) {
 		this.actor = actor;
@@ -28,14 +30,21 @@ public class MovableController implements KeyboardListener {
 			Map.entry(Input.Key.D, Direction.EAST)
 		);
 
+		oppositeDirection = Map.ofEntries(
+			Map.entry(Direction.NORTH, Direction.SOUTH),
+			Map.entry(Direction.SOUTH, Direction.NORTH),
+			Map.entry(Direction.WEST, Direction.EAST),
+			Map.entry(Direction.EAST, Direction.WEST)
+		);
 		lastMove = new Move<>(Direction.NONE);
 		lastMove.setActor(this.actor);
+		direction = Direction.NONE;
 	}
 
 
-	private void newDirection(Direction newDirection, float duration) {
+	private void newDirection(float duration) {
 		lastMove.stop();
-		lastMove = new Move<>(newDirection, duration);
+		lastMove = new Move<>(direction, (direction == Direction.NONE) ? 0f : duration);
 		lastMove.setActor(actor);
 		lastMove.scheduleFor(actor);
 		//actor.startedMoving(newDirection);
@@ -45,16 +54,21 @@ public class MovableController implements KeyboardListener {
 	@Override
 	public void keyPressed(Input.@NotNull Key key) {
 		KeyboardListener.super.keyPressed(key);
-		if (keyDirectionMap.containsKey(key))
-			newDirection(keyDirectionMap.get(key), Float.MAX_VALUE);
+
+		if (keyDirectionMap.containsKey(key)) {
+			direction = direction.combine(keyDirectionMap.get(key));
+			newDirection(Float.MAX_VALUE);
+		}
 	}
 
 
 	@Override
 	public void keyReleased(Input.@NotNull Key key) {
 		KeyboardListener.super.keyPressed(key);
-		if (keyDirectionMap.containsKey(key))
-			newDirection(Direction.NONE, 0f);
+		if (keyDirectionMap.containsKey(key)) {
+			direction = direction.combine(oppositeDirection.get(keyDirectionMap.get(key)));
+			newDirection(Float.MAX_VALUE);
+		}
 	}
 
 }
