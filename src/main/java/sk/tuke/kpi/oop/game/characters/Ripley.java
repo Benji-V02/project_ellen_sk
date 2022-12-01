@@ -9,6 +9,8 @@ public class Ripley extends AbstractActor implements Movable {
 
 	private final Animation anime;
 	private final int SPEED;
+	private int energy;
+	private int ammo;
 
 	public Ripley() {
 		super("Ellen");
@@ -18,6 +20,8 @@ public class Ripley extends AbstractActor implements Movable {
 		setAnimation(anime);
 		anime.pause();
 		SPEED = 2;
+		energy = 100;
+		ammo = 0;
 	}
 
 
@@ -38,5 +42,21 @@ public class Ripley extends AbstractActor implements Movable {
 		anime.pause();
 	}
 
+	public void setEnergy(int energy) {
+		if (energy < 0 || energy > 100) return;
+		this.energy = energy;
+	}
 
+	public int getEnergy() {
+		return this.energy;
+	}
+
+	public int getAmmo() {
+		return ammo;
+	}
+
+	public void setAmmo(int ammo) {
+		if (ammo > 500) return;
+		this.ammo = ammo;
+	}
 }

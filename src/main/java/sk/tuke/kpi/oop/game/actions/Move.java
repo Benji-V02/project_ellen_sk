@@ -36,7 +36,8 @@ public class Move<M extends Movable> implements Action<M> {
 	@Override
 	public boolean isDone() {
 		//System.out.println((timer > ZERO && timer <= duration) || actor == null);
-		if ((timer > ZERO && timer <= duration) || actor == null) return false;
+		if (actor == null) return true;
+		if (timer > ZERO && timer <= duration) return false;
 		actor.stoppedMoving();
 		return true;
 	}
