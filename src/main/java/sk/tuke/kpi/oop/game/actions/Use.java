@@ -25,9 +25,6 @@ public class Use<A extends Actor> extends AbstractAction<A> {
 
 	@Override
 	public void execute(float deltaTime) {
-		if (guy.intersects(actor)) {
-
-		}
 
 		setDone(true);
 	}
