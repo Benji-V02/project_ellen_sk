@@ -60,7 +60,7 @@ public class Backpack implements ActorContainer<Collectible> {
 	@Override
 	public @Nullable Collectible peek() {
 		try {
-			return items.get(items.size());
+			return items.get(items.size() - 1);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
