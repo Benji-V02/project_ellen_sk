@@ -8,6 +8,9 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 
 public class Take<A extends Keeper> extends AbstractAction {
 
+	public Take() {
+	}
+
 	@Override
 	public boolean isDone() {
 		return true;
