@@ -6,7 +6,7 @@ import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Take<A extends Keeper> extends AbstractAction {
+public class Take<K extends Keeper> extends AbstractAction<K> {
 
 	public Take() {
 	}
@@ -23,7 +23,7 @@ public class Take<A extends Keeper> extends AbstractAction {
 		for (Actor object : scene.getActors()) {
 			if (object instanceof Collectible && object.intersects(getActor())) {
 				try {
-					((A) getActor()).getBackpack().add((Collectible) object);
+					getActor().getBackpack().add((Collectible) object);
 					scene.removeActor(object);
 				} catch (IllegalStateException ex) {
 					scene.getOverlay().drawText(ex.getMessage(), 2, 2).showFor(2);
