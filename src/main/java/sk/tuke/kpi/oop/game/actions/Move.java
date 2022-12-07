@@ -20,7 +20,7 @@ public class Move<M extends Movable> implements Action<M> {
 	}
 
 	public Move(Direction direction) {
-		this(direction, 0f);
+		this(direction, ZERO);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class Move<M extends Movable> implements Action<M> {
 	@Override
 	public boolean isDone() {
 		//System.out.println((timer > ZERO && timer <= duration) || actor == null);
-		if (actor == null) return true;
-		if (timer > ZERO && timer <= duration) return false;
+		//if (actor == null) return false;
+		if (timer > ZERO && timer <= duration || actor == null) return false;
 		actor.stoppedMoving();
 		return true;
 	}
