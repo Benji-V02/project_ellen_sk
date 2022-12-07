@@ -43,6 +43,7 @@ public class MovableController implements KeyboardListener {
 
 
 	private void newDirection(float duration) {
+		if (actor == null) return;
 		lastMove.stop();
 		lastMove = new Move<>(direction, (direction == Direction.NONE) ? 0f : duration);
 		lastMove.setActor(actor);
