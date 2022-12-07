@@ -3,14 +3,18 @@ package sk.tuke.kpi.oop.game.characters;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
+import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
+import sk.tuke.kpi.oop.game.items.Backpack;
+import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Ripley extends AbstractActor implements Movable {
+public class Ripley extends AbstractActor implements Movable, Keeper<Collectible> {
 
 	private final Animation anime;
 	private final int SPEED;
 	private int energy;
 	private int ammo;
+	private final Backpack backpack;
 
 	public Ripley() {
 		super("Ellen");
@@ -22,6 +26,7 @@ public class Ripley extends AbstractActor implements Movable {
 		SPEED = 2;
 		energy = 100;
 		ammo = 0;
+		backpack = new Backpack("Ripley's backpack", 10);
 	}
 
 
@@ -42,6 +47,11 @@ public class Ripley extends AbstractActor implements Movable {
 		anime.pause();
 	}
 
+	@Override
+	public void collidedWithWall() {
+		Movable.super.collidedWithWall();
+	}
+
 	public void setEnergy(int energy) {
 		if (energy < 0 || energy > 100) return;
 		this.energy = energy;
@@ -58,5 +68,10 @@ public class Ripley extends AbstractActor implements Movable {
 	public void setAmmo(int ammo) {
 		if (ammo > 500) return;
 		this.ammo = ammo;
+	}
+
+	@Override
+	public Backpack getBackpack() {
+		return backpack;
 	}
 }
