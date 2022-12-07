@@ -8,6 +8,10 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 
 public class Take<A extends Keeper> extends AbstractAction {
 
+	@Override
+	public boolean isDone() {
+		return true;
+	}
 
 	@Override
 	public void execute(float deltaTime) {
