@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.ActorContainer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class Backpack implements ActorContainer<Collectible> {
 	@Override
 	public @Nullable Collectible peek() {
 		try {
-			return items.get(0);
+			return items.get(items.size());
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -68,7 +67,8 @@ public class Backpack implements ActorContainer<Collectible> {
 
 	@Override
 	public void shift() {
-		Collections.swap(items, 0, items.size());
+		items.add(items.get(0));
+		items.remove(0);
 	}
 
 	@NotNull
