@@ -5,10 +5,14 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.map.MapTile;
+import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Usable;
 
 public class Door extends AbstractActor implements Openable, Usable<Ripley> {
+
+	public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);
+	public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
 
 	private final Animation anime;
 	private boolean isOpened;
@@ -42,6 +46,7 @@ public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 		getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.CLEAR);
 		getScene().getMap().getTile(getPosX() / 16, (getPosY() / 16) + 1).setType(MapTile.Type.CLEAR);
 		isOpened = true;
+		getScene().getMessageBus().publish(DOOR_OPENED, this);
 	}
 
 	@Override
@@ -51,6 +56,7 @@ public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 		getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.WALL);
 		getScene().getMap().getTile(getPosX() / 16, (getPosY() / 16) + 1).setType(MapTile.Type.WALL);
 		isOpened = false;
+		getScene().getMessageBus().publish(DOOR_CLOSED, this);
 	}
 
 	@Override
