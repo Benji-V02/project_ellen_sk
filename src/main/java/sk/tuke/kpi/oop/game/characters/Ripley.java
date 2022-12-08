@@ -3,6 +3,7 @@ package sk.tuke.kpi.oop.game.characters;
 import sk.tuke.kpi.gamelib.GameApplication;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
@@ -15,6 +16,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
 	private int energy;
 	private int ammo;
 	private final Backpack backpack;
+
+	public static Topic<Ripley> RIPLEY_DIED;
 
 	public Ripley() {
 		super("Ellen");
@@ -52,9 +55,17 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
 		Movable.super.collidedWithWall();
 	}
 
+
+	private void die() {
+		getScene().getMessageBus().publish(RIPLEY_DIED, this);
+		setAnimation(new Animation("sprites/player_die.png", 32, 32, .1f, Animation.PlayMode.ONCE));
+	}
+
+
 	public void setEnergy(int energy) {
 		if (energy < 0 || energy > 100) return;
 		this.energy = energy;
+		if (this.energy == 0) die();
 	}
 
 	public int getEnergy() {
