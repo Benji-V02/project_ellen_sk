@@ -16,8 +16,10 @@ public class Use<A extends Actor> extends AbstractAction<A> {
 
 
 	public Disposable scheduleForIntersectingWith(Actor mediatingActor) {
+		setDone(true);
 		Scene scene = mediatingActor.getScene();
-		if (scene == null) return null;
+		if (scene == null)
+			return null;
 		Class<A> usingActorClass = usable.getUsingActorClass();  // `usable` je spominana clenska premenna
 
 		for (Actor usable : scene) {
@@ -31,6 +33,7 @@ public class Use<A extends Actor> extends AbstractAction<A> {
 
 	@Override
 	public void execute(float deltaTime) {
-
+		setDone(true);
+		usable.useWith(getActor());
 	}
 }

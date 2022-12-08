@@ -12,7 +12,10 @@ public class Take<K extends Keeper> extends AbstractAction<K> {
 
 	@Override
 	public void execute(float deltaTime) {
-		if (getActor() == null) return;
+		if (getActor() == null) {
+			setDone(true);
+			return;
+		}
 		Scene scene = getActor().getScene();
 		for (Actor object : scene.getActors()) {
 			if (object instanceof Collectible && object.intersects(getActor())) {
