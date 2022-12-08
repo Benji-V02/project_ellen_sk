@@ -1,12 +1,15 @@
 package sk.tuke.kpi.oop.game.controllers;
 
 import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.actions.Drop;
 import sk.tuke.kpi.oop.game.actions.Shift;
 import sk.tuke.kpi.oop.game.actions.Take;
+import sk.tuke.kpi.oop.game.actions.Use;
+import sk.tuke.kpi.oop.game.items.Usable;
 
 public class KeeperController implements KeyboardListener {
 
@@ -29,6 +32,23 @@ public class KeeperController implements KeyboardListener {
 				break;
 			case S:
 				new Shift<>().scheduleFor(keeper);
+				break;
+			case U:
+				try {
+					new Use<>((Usable<?>) getImpostor()).scheduleForIntersectingWith(keeper);
+				} catch (NullPointerException ex) {
+					break;
+				}
+
 		}
+	}
+
+
+	private Actor getImpostor() {
+		for (Actor impostor : keeper.getScene().getActors()) {
+			if (impostor.intersects(keeper) && impostor instanceof Usable)
+				return impostor;
+		}
+		return null;
 	}
 }

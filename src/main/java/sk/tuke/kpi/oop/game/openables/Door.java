@@ -28,6 +28,8 @@ public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 
 	@Override
 	public void useWith(Ripley actor) {
+		if (isOpen()) close();
+		else open();
 
 	}
 
