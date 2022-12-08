@@ -6,9 +6,8 @@ import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
-import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Ripley extends AbstractActor implements Movable, Keeper<Collectible> {
+public class Ripley extends AbstractActor implements Movable, Keeper {
 
 	private final Animation anime;
 	private final int SPEED;
