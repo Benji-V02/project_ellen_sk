@@ -59,6 +59,13 @@ public class Move<M extends Movable> implements Action<M> {
 				actor.getPosY() + (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
 			);
 		}
+		if (getActor().getScene().getMap().intersectsWithWall(actor)) {
+			actor.setPosition(
+				actor.getPosX() + (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
+				actor.getPosY() - (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
+			);
+			actor.collidedWithWall();
+		}
 
 		timer -= deltaTime;
 	}
