@@ -73,4 +73,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
 	public Backpack getBackpack() {
 		return backpack;
 	}
+
+	public void showRipleyState() {
+		getScene().getOverlay().drawText(String.format("| Energy: %d", energy), 120, 4);
+	}
 }

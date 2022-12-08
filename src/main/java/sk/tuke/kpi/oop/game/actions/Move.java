@@ -53,7 +53,7 @@ public class Move<M extends Movable> implements Action<M> {
 			direction = Direction.NONE;
 			return;
 		}
-		if (timer <= duration && timer > ZERO) {
+		if (timer <= duration && timer > ZERO && !getActor().getScene().getMap().intersectsWithWall(actor)) {
 			actor.setPosition(
 				actor.getPosX() - (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
 				actor.getPosY() + (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
