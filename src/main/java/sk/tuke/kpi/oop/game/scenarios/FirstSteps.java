@@ -5,6 +5,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
 import sk.tuke.kpi.oop.game.Reactor;
 import sk.tuke.kpi.oop.game.characters.Ripley;
+import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.items.FireExtinguisher;
 import sk.tuke.kpi.oop.game.items.Hammer;
@@ -22,6 +23,7 @@ public class FirstSteps implements SceneListener {
 		Ripley player = new Ripley();
 
 		scene.getInput().registerListener(new MovableController(player));
+		scene.getInput().registerListener(new KeeperController(player));
 		scene.addActor(player);
 
 		scene.follow(player);

@@ -21,13 +21,13 @@ public class MovableController implements KeyboardListener {
 		this.actor = actor;
 		keyDirectionMap = Map.ofEntries(
 			Map.entry(Input.Key.UP, Direction.NORTH),
-			Map.entry(Input.Key.W, Direction.NORTH),
+			//Map.entry(Input.Key.W, Direction.NORTH),
 			Map.entry(Input.Key.DOWN, Direction.SOUTH),
-			Map.entry(Input.Key.S, Direction.SOUTH),
+			//Map.entry(Input.Key.S, Direction.SOUTH),
 			Map.entry(Input.Key.LEFT, Direction.WEST),
-			Map.entry(Input.Key.A, Direction.WEST),
-			Map.entry(Input.Key.RIGHT, Direction.EAST),
-			Map.entry(Input.Key.D, Direction.EAST)
+			//Map.entry(Input.Key.A, Direction.WEST),
+			Map.entry(Input.Key.RIGHT, Direction.EAST)//,
+			//Map.entry(Input.Key.D, Direction.EAST)
 		);
 
 		oppositeDirection = Map.ofEntries(

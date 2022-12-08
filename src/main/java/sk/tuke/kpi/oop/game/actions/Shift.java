@@ -5,14 +5,13 @@ import sk.tuke.kpi.oop.game.Keeper;
 
 public class Shift<K extends Keeper> extends AbstractAction<K> {
 
-	@Override
-	public boolean isDone() {
-		return true;
+	public Shift() {
 	}
 
 	@Override
 	public void execute(float deltaTime) {
 		if (getActor() == null) return;
 		getActor().getBackpack().shift();
+		setDone(true);
 	}
 }

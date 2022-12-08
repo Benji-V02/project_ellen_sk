@@ -8,13 +8,7 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 
 public class Take<K extends Keeper> extends AbstractAction<K> {
 
-	public Take() {
-	}
 
-	@Override
-	public boolean isDone() {
-		return true;
-	}
 
 	@Override
 	public void execute(float deltaTime) {
@@ -27,8 +21,12 @@ public class Take<K extends Keeper> extends AbstractAction<K> {
 					scene.removeActor(object);
 				} catch (IllegalStateException ex) {
 					scene.getOverlay().drawText(ex.getMessage(), 2, 2).showFor(2);
+				} finally {
+					setDone(true);
 				}
 			}
 		}
 	}
+
+
 }
