@@ -9,16 +9,18 @@ public class Drop<K extends Keeper> extends AbstractAction<K> {
 	}
 
 	@Override
+	public boolean isDone() {
+		return true;
+	}
+
+	@Override
 	public void execute(float deltaTime) {
 		if (getActor() == null || getActor().getBackpack().peek() == null) return;
-		if (!isDone()) {
-			getActor().getScene().addActor(
-				getActor().getBackpack().peek(),
-				getActor().getPosX() + getActor().getWidth() / 2 - getActor().getBackpack().peek().getPosX() + getActor().getBackpack().peek().getWidth() / 2,
-				getActor().getPosY() + getActor().getHeight() / 2 - getActor().getBackpack().peek().getPosY() + getActor().getBackpack().peek().getHeight() / 2
-			);
-			getActor().getBackpack().remove(getActor().getBackpack().peek());
-			setDone(true);
-		}
+		getActor().getScene().addActor(
+			getActor().getBackpack().peek(),
+			getActor().getPosX() + getActor().getWidth() / 2 - getActor().getBackpack().peek().getPosX() + getActor().getBackpack().peek().getWidth() / 2,
+			getActor().getPosY() + getActor().getHeight() / 2 - getActor().getBackpack().peek().getPosY() + getActor().getBackpack().peek().getHeight() / 2
+		);
+		getActor().getBackpack().remove(getActor().getBackpack().peek());
 	}
 }
