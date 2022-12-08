@@ -20,6 +20,6 @@ public class FireExtinguisher extends BreakableTool<Reactor> implements Collecti
 
 	@Override
 	public Class<Reactor> getUsingActorClass() {
-		return null;
+		return Reactor.class;
 	}
 }

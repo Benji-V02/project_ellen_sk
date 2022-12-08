@@ -20,6 +20,6 @@ public class Ammo extends AbstractActor implements Usable<Ripley> {
 
 	@Override
 	public Class<Ripley> getUsingActorClass() {
-		return null;
+		return Ripley.class;
 	}
 }

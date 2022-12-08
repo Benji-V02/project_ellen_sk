@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.characters;
 
+import sk.tuke.kpi.gamelib.GameApplication;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
@@ -75,6 +76,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
 	}
 
 	public void showRipleyState() {
-		getScene().getOverlay().drawText(String.format("| Energy: %d", energy), 120, 4);
+		int windowHeight = getScene().getGame().getWindowSetup().getHeight();
+		int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET;
+		getScene().getOverlay().drawText(String.format("| Energy: %d", energy), 100, yTextPos);
 	}
 }

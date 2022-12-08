@@ -1,104 +1,58 @@
 package sk.tuke.kpi.oop.game.openables;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
+import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.gamelib.graphics.Point;
+import sk.tuke.kpi.gamelib.map.MapTile;
+import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Usable;
 
-public class Door implements Openable, Usable {
+public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 
-	//private final Animation anime;
+	private final Animation anime;
+	private boolean isOpened;
 
 	public Door() {
-		//Animation anime = new Animation("sprites/vdoor.png", 16, 32, .1f, Animation.PlayMode.ONCE);
-
-	}
-
-	@Override
-	public void useWith(Actor actor) {
-
-	}
-
-	@Override
-	public Class getUsingActorClass() {
-		return null;
-	}
-
-	@Override
-	public void open() {
-
-	}
-
-	@Override
-	public void close() {
-
-	}
-
-	@Override
-	public boolean isOpen() {
-		return false;
-	}
-
-	@Override
-	public int getPosX() {
-		return 0;
-	}
-
-	@Override
-	public int getPosY() {
-		return 0;
-	}
-
-	@Override
-	public int getWidth() {
-		return 0;
-	}
-
-	@Override
-	public int getHeight() {
-		return 0;
-	}
-
-	@Override
-	public @NotNull String getName() {
-		return null;
-	}
-
-	@Override
-	public @NotNull Animation getAnimation() {
-		return null;
-	}
-
-	@Override
-	public @Nullable Scene getScene() {
-		return null;
-	}
-
-	@Override
-	public @NotNull Point getPosition() {
-		return null;
-	}
-
-	@Override
-	public void setPosition(int posX, int posY) {
-
+		anime = new Animation("sprites/vdoor.png", 16, 32, .1f, Animation.PlayMode.ONCE_REVERSED);
+		setAnimation(anime);
+		isOpened = false;
+		//this.close();
 	}
 
 	@Override
 	public void addedToScene(@NotNull Scene scene) {
+		super.addedToScene(scene);
+		close();
+	}
+
+	@Override
+	public void useWith(Ripley actor) {
 
 	}
 
 	@Override
-	public void removedFromScene(@NotNull Scene scene) {
+	public Class<Ripley> getUsingActorClass() {return Ripley.class;}
 
+	@Override
+	public void open() {
+		anime.setPlayMode(Animation.PlayMode.ONCE);
+		getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.CLEAR);
+		getScene().getMap().getTile(getPosX() / 16, (getPosY() / 16) + 1).setType(MapTile.Type.CLEAR);
+		isOpened = true;
 	}
 
 	@Override
-	public boolean intersects(@NotNull Actor actor) {
-		return false;
+	public void close() {
+		anime.setPlayMode(Animation.PlayMode.ONCE_REVERSED);
+
+		getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.WALL);
+		getScene().getMap().getTile(getPosX() / 16, (getPosY() / 16) + 1).setType(MapTile.Type.WALL);
+		isOpened = false;
+	}
+
+	@Override
+	public boolean isOpen() {
+		return isOpened;
 	}
 }

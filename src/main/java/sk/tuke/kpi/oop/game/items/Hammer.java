@@ -28,6 +28,6 @@ public class Hammer extends BreakableTool<Reactor> implements Collectible {
 
 	@Override
 	public Class<Reactor> getUsingActorClass() {
-		return null;
+		return Reactor.class;
 	}
 }

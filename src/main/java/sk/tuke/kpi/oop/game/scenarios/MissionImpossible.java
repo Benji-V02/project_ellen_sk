@@ -13,8 +13,12 @@ import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.items.FireExtinguisher;
 import sk.tuke.kpi.oop.game.items.Hammer;
 import sk.tuke.kpi.oop.game.items.Wrench;
+import sk.tuke.kpi.oop.game.openables.Door;
 
 public class MissionImpossible implements SceneListener {
+
+	private Ripley player;
+
 
 	public static class Factory implements ActorFactory {
 
@@ -26,8 +30,8 @@ public class MissionImpossible implements SceneListener {
 					return new Ripley();
 				case "energy":
 					return new Energy();
-				//case "door":
-				//	return new Door();
+				case "door":
+					return new Door();
 				default:
 					return null;
 			}
@@ -37,7 +41,7 @@ public class MissionImpossible implements SceneListener {
 
 	@Override
 	public void sceneInitialized(@NotNull Scene scene) {
-		Ripley player = scene.getFirstActorByType(Ripley.class);
+		player = scene.getFirstActorByType(Ripley.class);
 
 		scene.getInput().registerListener(new MovableController(player));
 		scene.getInput().registerListener(new KeeperController(player));
@@ -52,6 +56,7 @@ public class MissionImpossible implements SceneListener {
 	@Override
 	public void sceneUpdating(@NotNull Scene scene) {
 		SceneListener.super.sceneUpdating(scene);
-		scene.getFirstActorByType(Ripley.class).showRipleyState();
+		//scene.getFirstActorByType(Ripley.class).showRipleyState();
+		player.showRipleyState();
 	}
 }
