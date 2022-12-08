@@ -39,13 +39,17 @@ public enum Direction {
 	}
 
 	public Direction combine(Direction other) {
-		int x = Math.abs(this.dx + other.getDx()) > 2 ? this.dx : this.dx + other.getDx();
-		int y = Math.abs(this.dy + other.getDy()) > 2 ? this.dy : this.dy + other.getDy();
+		int x = Math.abs(this.dx + other.getDx()) > 1 ? this.dx : this.dx + other.getDx();
+		int y = Math.abs(this.dy + other.getDy()) > 1 ? this.dy : this.dy + other.getDy();
 		for (Direction direct : Direction.values()) {
 			if (direct.getDx() == x && direct.getDy() == y)
 				return direct;
 		}
 		return NONE;
+	}
+
+	public static Direction fromAngle(float angle) {
+		return Direction.values()[(int) (angle / 45)];
 	}
 
 }
