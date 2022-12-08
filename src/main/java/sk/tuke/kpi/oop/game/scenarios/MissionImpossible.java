@@ -26,10 +26,9 @@ public class MissionImpossible implements SceneListener {
 					return new Ripley();
 				case "energy":
 					return new Energy();
-				//case ""
+				default:
+					return null;
 			}
-
-			return null;
 		}
 	}
 
