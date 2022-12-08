@@ -37,7 +37,7 @@ public class Move<M extends Movable> implements Action<M> {
 	public boolean isDone() {
 		//System.out.println((timer > ZERO && timer <= duration) || actor == null);
 		//if (actor == null) return false;
-		if ((timer > ZERO && timer <= duration) || actor == null) return false;
+		if ((timer >= ZERO && timer <= duration) || actor == null) return false;
 		actor.stoppedMoving();
 		return true;
 	}
@@ -47,7 +47,7 @@ public class Move<M extends Movable> implements Action<M> {
 		//System.out.println(timer);
 		if (timer == duration) {
 			actor.startedMoving(direction);
-		} else if (timer <= ZERO) {
+		} else if (timer < ZERO) {
 			actor.stoppedMoving();
 			timer = 0;
 			direction = Direction.NONE;
