@@ -8,6 +8,7 @@ import sk.tuke.kpi.oop.game.Movable;
 public class Move<M extends Movable> implements Action<M> {
 
 	private Direction direction;
+	private boolean done;
 	private final float duration;
 	private float timer;
 	private M actor;
@@ -17,6 +18,7 @@ public class Move<M extends Movable> implements Action<M> {
 		this.direction = direction;
 		this.duration = duration;
 		this.timer = this.duration;
+		done = false;
 	}
 
 	public Move(Direction direction) {
@@ -35,11 +37,9 @@ public class Move<M extends Movable> implements Action<M> {
 
 	@Override
 	public boolean isDone() {
-		//System.out.println((timer > ZERO && timer <= duration) || actor == null);
-		//if (actor == null) return false;
-		if ((timer >= ZERO && timer <= duration) || actor == null) return false;
-		actor.stoppedMoving();
-		return true;
+		if (timer <= ZERO) done = true;
+		if (done) actor.stoppedMoving();
+		return done;
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class Move<M extends Movable> implements Action<M> {
 		//System.out.println(timer);
 		if (timer == duration) {
 			actor.startedMoving(direction);
-		} else if (timer < ZERO) {
-			actor.stoppedMoving();
-			timer = 0;
+		} else if (timer <= ZERO) {
+
+			timer = ZERO;
 			direction = Direction.NONE;
 			return;
 		}
@@ -73,6 +73,7 @@ public class Move<M extends Movable> implements Action<M> {
 	@Override
 	public void reset() {
 		timer = duration;
+		done = false;
 	}
 
 	public void stop() {
