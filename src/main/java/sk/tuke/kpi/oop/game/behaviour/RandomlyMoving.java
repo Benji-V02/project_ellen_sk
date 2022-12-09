@@ -9,6 +9,8 @@ import sk.tuke.kpi.oop.game.Movable;
 
 public class RandomlyMoving implements Behaviour<Movable> {
 
+	public RandomlyMoving() {
+	}
 
 	@Override
 	public void setUp(Movable actor) {
