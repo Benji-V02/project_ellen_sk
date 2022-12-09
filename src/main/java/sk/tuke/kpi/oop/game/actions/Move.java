@@ -38,7 +38,6 @@ public class Move<M extends Movable> implements Action<M> {
 	@Override
 	public boolean isDone() {
 		if (timer <= ZERO) done = true;
-		if (done) actor.stoppedMoving();
 		return done;
 	}
 
@@ -77,6 +76,7 @@ public class Move<M extends Movable> implements Action<M> {
 	public void stop() {
 		timer = ZERO;
 		direction = Direction.NONE;
+		actor.stoppedMoving();
 		isDone();
 	}
 }
