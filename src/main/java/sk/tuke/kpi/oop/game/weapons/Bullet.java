@@ -48,7 +48,10 @@ public class Bullet extends AbstractActor implements Fireable {
 			                    .filter(member -> member instanceof Alive)
 			                    .findFirst()
 			                    .orElse(null);
-			if (target != null) ((Alive) target).getHealth().drain(10);
+			if (target != null) {
+				((Alive) target).getHealth().drain(10);
+				scene.removeActor(this);
+			}
 		})).scheduleFor(this);
 	}
 }
