@@ -8,8 +8,9 @@ import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
+import sk.tuke.kpi.oop.game.weapons.Firearm;
 
-public class Actor extends AbstractActor implements Movable, Keeper, Alive {
+public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Armed {
 
 	private final Animation anime;
 	private final int SPEED;
@@ -17,9 +18,9 @@ public class Actor extends AbstractActor implements Movable, Keeper, Alive {
 	private int ammo;
 	private final Backpack backpack;
 
-	public static Topic<Actor> RIPLEY_DIED;
+	public static Topic<Ripley> RIPLEY_DIED;
 
-	public Actor() {
+	public Ripley() {
 		super("Ellen");
 		anime = new Animation("sprites/player.png",
 			32, 32,
@@ -96,5 +97,15 @@ public class Actor extends AbstractActor implements Movable, Keeper, Alive {
 	@Override
 	public Health getHealth() {
 		return health;
+	}
+
+	@Override
+	public Firearm getFirearm() {
+		return null;
+	}
+
+	@Override
+	public void setFirearm(Firearm firearm) {
+
 	}
 }

@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.ActorFactory;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
-import sk.tuke.kpi.oop.game.characters.Actor;
 import sk.tuke.kpi.oop.game.characters.Alien;
+import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.items.*;
@@ -14,7 +14,7 @@ import sk.tuke.kpi.oop.game.openables.Door;
 
 public class EscapeRoom implements SceneListener {
 
-	private Actor player;
+	private Ripley player;
 
 
 	public static class Factory implements ActorFactory {
@@ -24,7 +24,7 @@ public class EscapeRoom implements SceneListener {
 		public @Nullable sk.tuke.kpi.gamelib.Actor create(@Nullable String type, @Nullable String name) {
 			switch (name) {
 				case "ellen":
-					return new Actor();
+					return new Ripley();
 				case "energy":
 					return new Energy();
 				case "door":
@@ -42,7 +42,7 @@ public class EscapeRoom implements SceneListener {
 
 	@Override
 	public void sceneInitialized(@NotNull Scene scene) {
-		player = scene.getFirstActorByType(Actor.class);
+		player = scene.getFirstActorByType(Ripley.class);
 
 		scene.getInput().registerListener(new MovableController(player));
 		scene.getInput().registerListener(new KeeperController(player));
