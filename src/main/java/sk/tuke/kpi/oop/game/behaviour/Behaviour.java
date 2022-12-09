@@ -6,3 +6,4 @@ public interface Behaviour<A extends Actor> {
 
 	void setUp(A actor);
 }
+

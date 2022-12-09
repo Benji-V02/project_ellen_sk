@@ -6,6 +6,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviour.Behaviour;
+import sk.tuke.kpi.oop.game.behaviour.RandomlyMoving;
 
 public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
@@ -13,11 +14,15 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 	private final Behaviour<? super Alien> behaviour;
 	private final int speed;
 
-	public Alien(Behaviour<? super Alien> behaviour) {
+	public Alien(int healthValue, Behaviour<? super Alien> behaviour) {
 		this.behaviour = behaviour;
 		setAnimation(new Animation("sprites/alien.png", 32, 32, .1f, Animation.PlayMode.LOOP_PINGPONG));
-		health = new Health(100);
+		health = new Health(healthValue);
 		speed = 1;
+	}
+
+	public Alien() {
+		this(100, new RandomlyMoving());
 	}
 
 	@Override

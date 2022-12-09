@@ -31,7 +31,7 @@ public class EscapeRoom implements SceneListener {
 				case "door":
 					return new Door();
 				case "alien":
-					return new Alien(new RandomlyMoving());
+					return new Alien(100, new RandomlyMoving());
 				case "ammo":
 					return new Ammo();
 				default:
