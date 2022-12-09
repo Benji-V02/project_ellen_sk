@@ -44,8 +44,10 @@ public class KeeperController implements KeyboardListener {
 
 	private void getImpostor() {
 		for (Actor impostor : keeper.getScene().getActors()) {
-			if (impostor.intersects(keeper) && impostor instanceof Usable)
+			if (impostor.intersects(keeper) && impostor instanceof Usable) {
 				new Use<>((Usable<?>) impostor).scheduleForIntersectingWith(keeper);
+				return;
+			}
 		}
 	}
 }
