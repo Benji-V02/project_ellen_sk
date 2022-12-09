@@ -12,7 +12,9 @@ public class Fire<A extends Armed> extends AbstractAction<A> {
 		if (getActor() == null) return;
 		Fireable bullet = getActor().getFirearm().fire();
 		if (bullet == null) return;
-		getActor().getScene().addActor(bullet);
+		getActor().getScene().addActor(bullet,
+			getActor().getPosX() + 8 + Direction.fromAngle(getActor().getAnimation().getRotation()).getDx() * 24,
+			getActor().getPosY() + 8 + Direction.fromAngle(getActor().getAnimation().getRotation()).getDy() * 24);
 		new Move<Fireable>(Direction.fromAngle(getActor().getAnimation().getRotation()), Float.MAX_VALUE).scheduleFor(bullet);
 	}
 }

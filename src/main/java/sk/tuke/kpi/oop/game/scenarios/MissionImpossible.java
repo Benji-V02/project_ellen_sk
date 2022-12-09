@@ -8,6 +8,7 @@ import sk.tuke.kpi.gamelib.SceneListener;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
+import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.items.FireExtinguisher;
 import sk.tuke.kpi.oop.game.items.Hammer;
@@ -44,6 +45,7 @@ public class MissionImpossible implements SceneListener {
 
 		scene.getInput().registerListener(new MovableController(player));
 		scene.getInput().registerListener(new KeeperController(player));
+		scene.getInput().registerListener(new ShooterController(player));
 
 		scene.follow(player);
 		scene.getGame().pushActorContainer(player.getBackpack());
