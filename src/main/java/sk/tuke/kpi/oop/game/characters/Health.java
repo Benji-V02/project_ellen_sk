@@ -59,6 +59,7 @@ public class Health {
 		for (ExhaustionEffect effect : effects) {
 			effect.apply();
 		}
+		effects.removeAll(effects);
 	}
 
 }
