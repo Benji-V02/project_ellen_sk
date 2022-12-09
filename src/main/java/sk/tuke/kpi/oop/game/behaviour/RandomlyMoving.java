@@ -20,7 +20,7 @@ public class RandomlyMoving implements Behaviour<Movable> {
 		new Loop<>(
 			new ActionSequence<>(
 				new Invoke<>(() -> {
-					actor.startedMoving(Direction.values()[(int) (Math.random() * 9)]);
+					actor.startedMoving(Direction.values()[(int) (Math.random() * 8)]);
 				}),
 				new Wait<>((int) (Math.random() * 10))
 			)).scheduleFor(actor);
