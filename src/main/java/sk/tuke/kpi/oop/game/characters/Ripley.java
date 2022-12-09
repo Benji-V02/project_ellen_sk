@@ -9,6 +9,7 @@ import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
+import sk.tuke.kpi.oop.game.weapons.Gun;
 
 public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Armed {
 
@@ -18,7 +19,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Arm
 	private int ammo;
 	private final Backpack backpack;
 
-	public static Topic<Ripley> RIPLEY_DIED;
+	public static final Topic<Ripley> RIPLEY_DIED = Topic.create("ripley died", Ripley.class);
+	private Firearm firearm;
 
 	public Ripley() {
 		super("Ellen");
@@ -32,6 +34,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Arm
 		backpack = new Backpack("Actor's backpack", 10);
 		health = new Health(100);
 		health.onExhaustion(this::die);
+		firearm = new Gun(500, 500);
 	}
 
 
@@ -101,11 +104,11 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Arm
 
 	@Override
 	public Firearm getFirearm() {
-		return null;
+		return firearm;
 	}
 
 	@Override
 	public void setFirearm(Firearm firearm) {
-
+		this.firearm = firearm;
 	}
 }
