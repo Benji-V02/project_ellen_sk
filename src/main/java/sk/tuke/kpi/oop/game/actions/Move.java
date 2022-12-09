@@ -37,20 +37,13 @@ public class Move<M extends Movable> implements Action<M> {
 
 	@Override
 	public boolean isDone() {
-		if (timer <= ZERO) done = true;
 		return done;
 	}
 
 	@Override
 	public void execute(float deltaTime) {
 		//System.out.println(timer);
-		if (timer == duration) {
-			actor.startedMoving(direction);
-		} else if (timer <= ZERO) {
-
-			stop();
-			return;
-		}
+		if (isDone() || actor == null) return;
 		if (!getActor().getScene().getMap().intersectsWithWall(actor)) {
 			actor.setPosition(
 				actor.getPosX() - (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
@@ -75,8 +68,10 @@ public class Move<M extends Movable> implements Action<M> {
 
 	public void stop() {
 		timer = ZERO;
+		done = true;
 		direction = Direction.NONE;
-		actor.stoppedMoving();
-		isDone();
+		if (actor != null) {
+			actor.stoppedMoving();
+		}
 	}
 }
