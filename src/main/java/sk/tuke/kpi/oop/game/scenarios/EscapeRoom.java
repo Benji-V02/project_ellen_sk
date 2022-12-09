@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.ActorFactory;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
+import sk.tuke.kpi.oop.game.behaviour.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
@@ -30,7 +31,7 @@ public class EscapeRoom implements SceneListener {
 				case "door":
 					return new Door();
 				case "alien":
-					return new Alien();
+					return new Alien(new RandomlyMoving());
 				case "ammo":
 					return new Ammo();
 				default:
