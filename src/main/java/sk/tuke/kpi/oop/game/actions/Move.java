@@ -49,8 +49,7 @@ public class Move<M extends Movable> implements Action<M> {
 			actor.startedMoving(direction);
 		} else if (timer <= ZERO) {
 
-			timer = ZERO;
-			direction = Direction.NONE;
+			stop();
 			return;
 		}
 		if (timer <= duration && timer > ZERO && !getActor().getScene().getMap().intersectsWithWall(actor)) {
@@ -78,6 +77,7 @@ public class Move<M extends Movable> implements Action<M> {
 
 	public void stop() {
 		timer = ZERO;
+		direction = Direction.NONE;
 		isDone();
 	}
 }
