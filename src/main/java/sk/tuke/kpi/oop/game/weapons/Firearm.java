@@ -24,4 +24,14 @@ public abstract class Firearm {
 
 	}
 
+	public Fireable fire() {
+		if (ammo > 0) {
+			ammo--;
+			return createBullet();
+		}
+		return null;
+	}
+
+	protected abstract Fireable createBullet();
+
 }

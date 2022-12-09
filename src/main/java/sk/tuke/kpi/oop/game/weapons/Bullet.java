@@ -25,4 +25,11 @@ public class Bullet extends AbstractActor implements Fireable {
 		}
 
 	}
+
+
+	@Override
+	public void collidedWithWall() {
+		getScene().removeActor(this);
+	}
+
 }
