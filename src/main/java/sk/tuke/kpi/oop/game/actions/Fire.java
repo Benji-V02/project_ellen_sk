@@ -9,7 +9,7 @@ public class Fire<A extends Armed> extends AbstractAction<A> {
 	@Override
 	public void execute(float deltaTime) {
 		setDone(true);
-
+		if (getActor() == null) return;
 		Fireable bullet = getActor().getFirearm().fire();
 		if (bullet == null) return;
 		getActor().getScene().addActor(bullet);
