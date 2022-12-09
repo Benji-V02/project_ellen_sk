@@ -6,10 +6,12 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.map.MapTile;
 import sk.tuke.kpi.gamelib.messages.Topic;
-import sk.tuke.kpi.oop.game.characters.Ripley;
+import sk.tuke.kpi.oop.game.characters.Actor;
 import sk.tuke.kpi.oop.game.items.Usable;
 
-public class Door extends AbstractActor implements Openable, Usable<Ripley> {
+public class Door extends AbstractActor implements Openable, Usable<Actor> {
+
+	public enum Orientation {VERTICAL, HORIZONTAL}
 
 	public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);
 	public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
@@ -17,11 +19,18 @@ public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 	private final Animation anime;
 	private boolean isOpened;
 
-	public Door() {
-		anime = new Animation("sprites/vdoor.png", 16, 32, .1f, Animation.PlayMode.ONCE_REVERSED);
+
+	Door(String name, Orientation orientation) {
+		super(name);
+		anime = orientation == Orientation.HORIZONTAL ?
+			new Animation("sprites/vdoor.png", 16, 32, .1f, Animation.PlayMode.ONCE_REVERSED) :
+			new Animation("sprites/hdoor.png", 32, 16, .1f, Animation.PlayMode.ONCE_REVERSED);
 		setAnimation(anime);
 		isOpened = false;
-		//this.close();
+	}
+
+	public Door() {
+		this("", Orientation.HORIZONTAL);
 	}
 
 	@Override
@@ -31,14 +40,14 @@ public class Door extends AbstractActor implements Openable, Usable<Ripley> {
 	}
 
 	@Override
-	public void useWith(Ripley actor) {
+	public void useWith(Actor actor) {
 		if (isOpen()) close();
 		else open();
 
 	}
 
 	@Override
-	public Class<Ripley> getUsingActorClass() {return Ripley.class;}
+	public Class<Actor> getUsingActorClass() {return Actor.class;}
 
 	@Override
 	public void open() {

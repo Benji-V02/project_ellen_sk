@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
 import sk.tuke.kpi.oop.game.Reactor;
-import sk.tuke.kpi.oop.game.characters.Ripley;
+import sk.tuke.kpi.oop.game.characters.Actor;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.items.FireExtinguisher;
@@ -20,7 +20,7 @@ public class FirstSteps implements SceneListener {
 		Reactor reactor = new Reactor();
 		scene.addActor(reactor);
 
-		Ripley player = new Ripley();
+		Actor player = new Actor();
 
 		scene.getInput().registerListener(new MovableController(player));
 		scene.getInput().registerListener(new KeeperController(player));

@@ -9,7 +9,7 @@ import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
 
-public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
+public class Actor extends AbstractActor implements Movable, Keeper, Alive {
 
 	private final Animation anime;
 	private final int SPEED;
@@ -17,9 +17,9 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
 	private int ammo;
 	private final Backpack backpack;
 
-	public static Topic<Ripley> RIPLEY_DIED;
+	public static Topic<Actor> RIPLEY_DIED;
 
-	public Ripley() {
+	public Actor() {
 		super("Ellen");
 		anime = new Animation("sprites/player.png",
 			32, 32,
@@ -28,7 +28,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
 		anime.pause();
 		SPEED = 2;
 		ammo = 0;
-		backpack = new Backpack("Ripley's backpack", 10);
+		backpack = new Backpack("Actor's backpack", 10);
 		health = new Health(100);
 		health.onExhaustion(this::die);
 	}

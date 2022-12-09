@@ -2,9 +2,9 @@ package sk.tuke.kpi.oop.game.items;
 
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.characters.Ripley;
+import sk.tuke.kpi.oop.game.characters.Alive;
 
-public class Energy extends AbstractActor implements Usable<Ripley> {
+public class Energy extends AbstractActor implements Usable<Alive> {
 
 
 	public Energy() {
@@ -13,7 +13,7 @@ public class Energy extends AbstractActor implements Usable<Ripley> {
 
 
 	@Override
-	public void useWith(Ripley actor) {
+	public void useWith(Alive actor) {
 		if (actor.getHealth().getValue() == 100 || actor.getHealth().getValue() == 0)
 			return;
 		actor.getHealth().restore();
@@ -21,7 +21,7 @@ public class Energy extends AbstractActor implements Usable<Ripley> {
 	}
 
 	@Override
-	public Class<Ripley> getUsingActorClass() {
-		return Ripley.class;
+	public Class<Alive> getUsingActorClass() {
+		return Alive.class;
 	}
 }
