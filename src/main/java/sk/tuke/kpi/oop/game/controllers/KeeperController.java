@@ -35,6 +35,9 @@ public class KeeperController implements KeyboardListener {
 			case U:
 				getImpostor();
 				break;
+			case B:
+				getFromBackpack();
+				break;
 			default:
 				break;
 
@@ -48,6 +51,12 @@ public class KeeperController implements KeyboardListener {
 				new Use<>((Usable<?>) impostor).scheduleForIntersectingWith(keeper);
 				return;
 			}
+		}
+	}
+
+	private void getFromBackpack() {
+		if (keeper.getBackpack().peek() instanceof Usable) {
+			new Use<>((Usable<?>) keeper.getBackpack().peek()).scheduleForIntersectingWith(keeper);
 		}
 	}
 }
