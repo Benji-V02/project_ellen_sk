@@ -12,6 +12,7 @@ public class Fire<A extends Armed> extends AbstractAction<A> {
 
 		Fireable bullet = getActor().getFirearm().fire();
 		if (bullet == null) return;
+		getActor().getScene().addActor(bullet);
 		new Move<Fireable>(Direction.fromAngle(getActor().getAnimation().getRotation()), Float.MAX_VALUE).scheduleFor(bullet);
 	}
 }
