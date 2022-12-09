@@ -70,7 +70,7 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
 		anime.setPlayMode(Animation.PlayMode.ONCE_REVERSED);
 		if (orientation == Orientation.HORIZONTAL) {
 			getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.WALL);
-			getScene().getMap().getTile(getPosX() / 16, (getPosY() / 16) + 1).setType(MapTile.Type.WALL);
+			getScene().getMap().getTile((getPosX() / 16) + 1, (getPosY() / 16)).setType(MapTile.Type.WALL);
 		} else {
 			getScene().getMap().getTile(getPosX() / 16, getPosY() / 16).setType(MapTile.Type.WALL);
 			getScene().getMap().getTile((getPosX() / 16) + 1, (getPosY() / 16)).setType(MapTile.Type.WALL);
