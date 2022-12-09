@@ -14,9 +14,9 @@ public class Energy extends AbstractActor implements Usable<Ripley> {
 
 	@Override
 	public void useWith(Ripley actor) {
-		if (actor.getEnergy() == 100 || actor.getEnergy() == 0)
+		if (actor.getHealth().getValue() == 100 || actor.getHealth().getValue() == 0)
 			return;
-		actor.setEnergy(100);
+		actor.getHealth().restore();
 		this.getScene().removeActor(this);
 	}
 

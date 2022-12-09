@@ -12,9 +12,9 @@ public class Ammo extends AbstractActor implements Usable<Ripley> {
 
 	@Override
 	public void useWith(Ripley actor) {
-		if (actor.getEnergy() == 500)
+		if (actor.getAmmo() == 500)
 			return;
-		actor.setEnergy(50);
+		actor.setAmmo(50);
 		this.getScene().removeActor(this);
 	}
 
