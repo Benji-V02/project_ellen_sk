@@ -52,13 +52,12 @@ public class Move<M extends Movable> implements Action<M> {
 			stop();
 			return;
 		}
-		if (timer <= duration && timer > ZERO && !getActor().getScene().getMap().intersectsWithWall(actor)) {
+		if (!getActor().getScene().getMap().intersectsWithWall(actor)) {
 			actor.setPosition(
 				actor.getPosX() - (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
 				actor.getPosY() + (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
 			);
-		}
-		if (getActor().getScene().getMap().intersectsWithWall(actor)) {
+		} else {
 			actor.setPosition(
 				actor.getPosX() + (int) Math.round(actor.getSpeed() * Math.sin(Math.toRadians(direction.getAngle()))),
 				actor.getPosY() - (int) Math.round(actor.getSpeed() * Math.cos(Math.toRadians(direction.getAngle())))
