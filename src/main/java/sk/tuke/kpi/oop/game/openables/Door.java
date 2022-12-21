@@ -21,7 +21,7 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
 	private final Orientation orientation;
 
 
-	Door(String name, Orientation orientation) {
+	public Door(String name, Orientation orientation) {
 		super(name);
 		this.orientation = orientation;
 		anime = orientation == Orientation.HORIZONTAL ?
