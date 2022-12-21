@@ -2,17 +2,21 @@ package sk.tuke.kpi.oop.game.characters.warrior;
 
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 
-public abstract class AbstractWarrior extends AbstractActor implements Mutable {
+public abstract class AbstractWarrior extends AbstractActor implements Warrior {
 
-	private Mutable mutation;
+	protected Warrior mutation;
 
-
-	public void setMutation(Mutable mutation) {
-		if (this.mutation == null)
-			this.mutation = mutation;
-		else
-			this.mutation.setMutation(mutation);
+	public AbstractWarrior(Warrior mutation) {
+		this.mutation = mutation;
 	}
 
+	@Override
+	public int getSpeed() {
+		return mutation.getSpeed();
+	}
 
+	public int getHealthModifier() {
+		if (mutation == null) return 0;
+		return mutation.getHealthModifier();
+	}
 }

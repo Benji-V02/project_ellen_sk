@@ -1,24 +1,21 @@
 package sk.tuke.kpi.oop.game.characters.warrior;
 
-import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.oop.game.characters.Health;
+import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Armored extends AbstractActor implements Mutable {
+public class Armored extends AbstractWarrior {
 
-	private final Mutable mutation;
-
-	public Armored() {
-		mutation = null;
+	public Armored(Warrior mutation) {
+		super(mutation);
+		setAnimation(new Animation("sprites/solger/helmet.png"));
 	}
 
 	@Override
 	public int getSpeed() {
-		if (mutation == null) return -1;
 		return -1 + mutation.getSpeed();
 	}
 
 	@Override
-	public Health getHealth() {
-		return null;
+	public int getHealthModifier() {
+		return 100 + mutation.getHealthModifier();
 	}
 }
