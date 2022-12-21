@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game.behaviour;
+package sk.tuke.kpi.oop.game.behaviours;
 
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.messages.Topic;

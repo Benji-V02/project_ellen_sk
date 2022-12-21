@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game.behaviour;
+package sk.tuke.kpi.oop.game.behaviours;
 
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;

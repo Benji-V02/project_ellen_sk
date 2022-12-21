@@ -5,8 +5,8 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Movable;
-import sk.tuke.kpi.oop.game.behaviour.Behaviour;
-import sk.tuke.kpi.oop.game.behaviour.RandomlyMoving;
+import sk.tuke.kpi.oop.game.behaviours.Behaviour;
+import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 
 public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 

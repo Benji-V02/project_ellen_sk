@@ -93,8 +93,16 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Arm
 
 	public void showRipleyState() {
 		int windowHeight = getScene().getGame().getWindowSetup().getHeight();
-		int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET;
-		getScene().getOverlay().drawText(String.format("| Energy: %d", health.getValue()), 100, yTextPos);
+		getScene().getGame().getOverlay().drawText(
+			String.format("Energy: %d", health.getValue()),
+			15,
+			windowHeight - 2 * GameApplication.STATUS_LINE_OFFSET
+		);
+		getScene().getGame().getOverlay().drawText(
+			String.format("Ammo: %d", firearm.getAmmo()),
+			15,
+			windowHeight - 3 * GameApplication.STATUS_LINE_OFFSET
+		);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.ActorFactory;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
-import sk.tuke.kpi.oop.game.behaviour.RandomlyMoving;
+import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
@@ -55,10 +55,11 @@ public class EscapeRoom implements SceneListener {
 		player.getBackpack().add(new Wrench());
 	}
 
-	@Override
+	//@Override
 	public void sceneUpdating(@NotNull Scene scene) {
-		SceneListener.super.sceneUpdating(scene);
-		//scene.getFirstActorByType(Actor.class).showRipleyState();
+		assert player != null;
 		player.showRipleyState();
+		//scene.getFirstActorByType(Actor.class).showRipleyState();
+
 	}
 }

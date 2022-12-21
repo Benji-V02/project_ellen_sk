@@ -1,7 +1,7 @@
 package sk.tuke.kpi.oop.game.characters;
 
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.behaviour.Behaviour;
+import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 
 public class AlienMother extends Alien {
 
