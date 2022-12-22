@@ -4,11 +4,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.characters.Ripley;
-import sk.tuke.kpi.oop.game.characters.warrior.SimpleWarrior;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.openables.Door;
+import sk.tuke.kpi.oop.game.spawner.Spawner;
+import sk.tuke.kpi.oop.game.spawner.observers.SpawningObserver;
 
 import java.util.Map;
 
@@ -30,13 +31,26 @@ public class CustomLevel implements SceneListener {
 
 		@Override
 		public @Nullable Actor create(@Nullable String type, @Nullable String name) {
-			return objects.get(name);
+			switch (name) {
+				case "door":
+					return new Door();
+				case "vertical-door":
+					return new Door(name, Door.Orientation.VERTICAL);
+				case "ellen":
+					return new Ripley();
+				case "spawner":
+					Spawner spawner = new Spawner();
+					new SpawningObserver(spawner);
+					return spawner;
+				default:
+					return null;
+			}
 		}
 	}
 
 	@Override
 	public void sceneInitialized(@NotNull Scene scene) {
-		scene.addActor(new SimpleWarrior(), scene.getFirstActorByType(Ripley.class).getPosX(), scene.getFirstActorByType(Ripley.class).getPosY());
+
 		player = scene.getFirstActorByType(Ripley.class);
 
 		Disposable moves = scene.getInput().registerListener(new MovableController(player));

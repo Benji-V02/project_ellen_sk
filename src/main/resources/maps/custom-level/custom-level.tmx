@@ -101,8 +101,8 @@
   <object id="2" name="vertical_door" x="240" y="208" width="32" height="16"/>
   <object id="3" name="door" x="160.118" y="144" width="16" height="32"/>
   <object id="4" name="vertical_door" x="240" y="96" width="32" height="16"/>
-  <object id="5" name="ellen" class="ripley" x="16" y="128" width="32" height="32"/>
   <object id="7" name="spawner" x="336" y="32" width="48" height="48"/>
   <object id="8" name="spawner" x="336" y="240" width="48" height="48"/>
+  <object id="5" name="ellen" class="ripley" x="16" y="128" width="32" height="32"/>
  </objectgroup>
 </map>

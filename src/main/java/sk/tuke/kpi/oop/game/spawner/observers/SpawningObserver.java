@@ -12,6 +12,7 @@ public class SpawningObserver extends Observer {
 		remainingSpawns = 10;
 	}
 
+
 	@Override
 	public void update() {
 		remainingSpawns -= spawner.spawnWarriors(remainingSpawns > 3 ? 3 : remainingSpawns);

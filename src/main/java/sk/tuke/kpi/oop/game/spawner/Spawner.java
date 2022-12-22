@@ -1,13 +1,26 @@
 package sk.tuke.kpi.oop.game.spawner;
 
+import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.characters.warrior.Armored;
+import sk.tuke.kpi.oop.game.characters.warrior.Faster;
+import sk.tuke.kpi.oop.game.characters.warrior.SimpleWarrior;
+import sk.tuke.kpi.oop.game.characters.warrior.Warrior;
 import sk.tuke.kpi.oop.game.spawner.observers.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Spawner extends AbstractActor {
 	private final List<Observer> observers = new ArrayList<>();
+
+
+	public Spawner() {
+		setAnimation(new Animation("sprites/lift.png"));
+	}
 
 	public void attach(Observer observer) {
 		observers.add(observer);
@@ -20,6 +33,24 @@ public class Spawner extends AbstractActor {
 
 
 	public int spawnWarriors(int maxSpawn) {
-		return 0;
+		int newWarriors = new Random().nextInt(maxSpawn);
+		for (int i = 0; i < newWarriors; i++) {
+			Warrior newWarrior = new SimpleWarrior();
+			double randomNum = Math.random();
+			if (randomNum < .3)
+				newWarrior = new Armored(newWarrior);
+			else if (randomNum < .6)
+				newWarrior = new Faster(newWarrior);
+			else if (randomNum < .9)
+				newWarrior = new Faster(new Armored(newWarrior));
+			getScene().addActor(newWarrior, getPosX(), getPosY());
+		}
+		return newWarriors + 1;
+	}
+
+	@Override
+	public void addedToScene(@NotNull Scene scene) {
+		super.addedToScene(scene);
+		updateObservers();
 	}
 }
