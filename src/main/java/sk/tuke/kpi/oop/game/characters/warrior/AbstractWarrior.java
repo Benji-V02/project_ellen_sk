@@ -15,7 +15,6 @@ import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Enemy;
 import sk.tuke.kpi.oop.game.characters.Health;
-import sk.tuke.kpi.oop.game.characters.Ripley;
 
 public abstract class AbstractWarrior extends AbstractActor implements Warrior, Movable, Alive, Enemy {
 
@@ -23,7 +22,7 @@ public abstract class AbstractWarrior extends AbstractActor implements Warrior, 
 	private final Health health;
 	private final Behaviour<? super AbstractWarrior> behaviour;
 
-	public static final Topic<Ripley> WARRIOR_DIED = Topic.create("warrior was killed", Ripley.class);
+	public static final Topic<Warrior> WARRIOR_DIED = Topic.create("warrior was killed", Warrior.class);
 
 	public AbstractWarrior(Warrior mutation) {
 		behaviour = new RandomlyMoving();
@@ -50,8 +49,10 @@ public abstract class AbstractWarrior extends AbstractActor implements Warrior, 
 				new Invoke<>(this::aliveActor),
 				new Wait<>(0)
 			)).scheduleFor(this);
-		getHealth().onExhaustion(() ->
-			scene.removeActor(this));
+		getHealth().onExhaustion(() -> {
+			scene.getMessageBus().publish(WARRIOR_DIED, this);
+			scene.removeActor(this);
+		});
 		if (behaviour != null) {
 			behaviour.setUp(this);
 		}

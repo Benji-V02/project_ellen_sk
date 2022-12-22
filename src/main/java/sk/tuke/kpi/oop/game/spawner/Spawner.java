@@ -50,7 +50,11 @@ public class Spawner extends AbstractActor {
 	public void addedToScene(@NotNull Scene scene) {
 		super.addedToScene(scene);
 		updateObservers();
-		scene.getMessageBus().subscribe(SimpleWarrior.WARRIOR_DIED, (SimpleWarrior) -> this.updateObservers());
-		scene.getMessageBus().subscribe(AbstractWarrior.WARRIOR_DIED, (AbstractWarrior) -> this.updateObservers());
+		scene.getMessageBus().subscribe(SimpleWarrior.WARRIOR_DIED, (Warrior) -> {
+			this.updateObservers();
+		});
+		scene.getMessageBus().subscribe(AbstractWarrior.WARRIOR_DIED, (Warrior) -> {
+			this.updateObservers();
+		});
 	}
 }
