@@ -50,8 +50,8 @@ public class CustomLevel implements SceneListener {
 
 	@Override
 	public void sceneInitialized(@NotNull Scene scene) {
-
 		player = scene.getFirstActorByType(Ripley.class);
+		//scene.addActor(new Armored(new SimpleWarrior()), player.getPosX(), player.getPosY());
 
 		Disposable moves = scene.getInput().registerListener(new MovableController(player));
 		Disposable keeping = scene.getInput().registerListener(new KeeperController(player));

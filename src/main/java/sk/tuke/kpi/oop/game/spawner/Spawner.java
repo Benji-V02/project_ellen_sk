@@ -4,10 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.characters.warrior.Armored;
-import sk.tuke.kpi.oop.game.characters.warrior.Faster;
-import sk.tuke.kpi.oop.game.characters.warrior.SimpleWarrior;
-import sk.tuke.kpi.oop.game.characters.warrior.Warrior;
+import sk.tuke.kpi.oop.game.characters.warrior.*;
 import sk.tuke.kpi.oop.game.spawner.observers.Observer;
 
 import java.util.ArrayList;
@@ -20,6 +17,7 @@ public class Spawner extends AbstractActor {
 
 	public Spawner() {
 		setAnimation(new Animation("sprites/lift.png"));
+
 	}
 
 	public void attach(Observer observer) {
@@ -34,7 +32,7 @@ public class Spawner extends AbstractActor {
 
 	public int spawnWarriors(int maxSpawn) {
 		int newWarriors = new Random().nextInt(maxSpawn);
-		for (int i = 0; i < newWarriors; i++) {
+		for (int i = 0; i <= newWarriors; i++) {
 			Warrior newWarrior = new SimpleWarrior();
 			double randomNum = Math.random();
 			if (randomNum < .3)
@@ -52,5 +50,7 @@ public class Spawner extends AbstractActor {
 	public void addedToScene(@NotNull Scene scene) {
 		super.addedToScene(scene);
 		updateObservers();
+		scene.getMessageBus().subscribe(SimpleWarrior.WARRIOR_DIED, (SimpleWarrior) -> this.updateObservers());
+		scene.getMessageBus().subscribe(AbstractWarrior.WARRIOR_DIED, (AbstractWarrior) -> this.updateObservers());
 	}
 }

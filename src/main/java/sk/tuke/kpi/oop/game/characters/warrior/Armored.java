@@ -18,4 +18,5 @@ public class Armored extends AbstractWarrior {
 	public int getHealthModifier() {
 		return 100 + mutation.getHealthModifier();
 	}
+
 }

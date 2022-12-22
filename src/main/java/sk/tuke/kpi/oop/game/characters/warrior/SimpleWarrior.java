@@ -9,6 +9,7 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.actions.While;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
@@ -16,11 +17,13 @@ import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Enemy;
 import sk.tuke.kpi.oop.game.characters.Health;
+import sk.tuke.kpi.oop.game.characters.Ripley;
 
 public class SimpleWarrior extends AbstractActor implements Movable, Alive, Enemy, Warrior {
 
 	private Health health;
 	private final Behaviour<? super SimpleWarrior> behaviour;
+	public static final Topic<Ripley> WARRIOR_DIED = Topic.create("warrior was killed", Ripley.class);
 
 	public SimpleWarrior() {
 		setHealth();
