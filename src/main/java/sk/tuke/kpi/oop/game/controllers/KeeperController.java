@@ -56,7 +56,7 @@ public class KeeperController implements KeyboardListener {
 
 	private void getFromBackpack() {
 		if (keeper.getBackpack().peek() instanceof Usable) {
-			new Use<>((Usable<?>) keeper.getBackpack().peek()).scheduleForIntersectingWith(keeper);
+			new Use<>((Usable<?>) (keeper.getBackpack().peek())).scheduleForIntersectingWith(keeper);
 		}
 	}
 }

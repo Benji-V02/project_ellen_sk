@@ -34,6 +34,7 @@ public class Use<A extends Actor> extends AbstractAction<A> {
 	@Override
 	public void execute(float deltaTime) {
 		setDone(true);
+		//System.out.println("Executing Use action !");
 		usable.useWith(getActor());
 	}
 }

@@ -5,7 +5,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.characters.Armed;
 
 
-public class Ammo extends AbstractActor implements Usable<Armed> {
+public class Ammo extends AbstractActor implements Usable<Armed>, Collectible {
 
 	public Ammo() {
 		setAnimation(new Animation("sprites/ammo.png"));
