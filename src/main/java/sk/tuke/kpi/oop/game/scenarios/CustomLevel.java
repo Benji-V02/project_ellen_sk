@@ -16,6 +16,11 @@ import java.util.Map;
 public class CustomLevel implements SceneListener {
 
 	private Ripley player;
+	private int remainingSpawns;
+	private Disposable moves;
+	private Disposable keeping;
+	private Disposable shooting;
+	private boolean playerDied;
 
 	public static class Factory implements ActorFactory {
 
@@ -48,14 +53,19 @@ public class CustomLevel implements SceneListener {
 		}
 	}
 
+	public CustomLevel() {
+		remainingSpawns = 2;
+		playerDied = false;
+	}
+
 	@Override
 	public void sceneInitialized(@NotNull Scene scene) {
 		player = scene.getFirstActorByType(Ripley.class);
 		//scene.addActor(new Armored(new SimpleWarrior()), player.getPosX(), player.getPosY());
 
-		Disposable moves = scene.getInput().registerListener(new MovableController(player));
-		Disposable keeping = scene.getInput().registerListener(new KeeperController(player));
-		Disposable shooting = scene.getInput().registerListener(new ShooterController(player));
+		moves = scene.getInput().registerListener(new MovableController(player));
+		keeping = scene.getInput().registerListener(new KeeperController(player));
+		shooting = scene.getInput().registerListener(new ShooterController(player));
 
 		scene.follow(player);
 		scene.getGame().pushActorContainer(player.getBackpack());
@@ -65,6 +75,11 @@ public class CustomLevel implements SceneListener {
 			keeping.dispose();
 			moves.dispose();
 			System.out.println("GAME OVER!");
+			playerDied = true;
+		});
+		scene.getMessageBus().subscribe(Spawner.WIN, Spawner -> {
+			remainingSpawns--;
+
 		});
 	}
 
@@ -72,6 +87,14 @@ public class CustomLevel implements SceneListener {
 		assert player != null;
 		player.showRipleyState();
 		//scene.getFirstActorByType(Actor.class).showRipleyState();
+		if (remainingSpawns == 0) {
+			shooting.dispose();
+			keeping.dispose();
+			moves.dispose();
+			scene.getOverlay().drawText("WIN!", player.getPosX(), player.getPosY());
+		}
+		if (playerDied)
+			scene.getOverlay().drawText("GAME OVER!", player.getPosX(), player.getPosY());
 
 	}
 }

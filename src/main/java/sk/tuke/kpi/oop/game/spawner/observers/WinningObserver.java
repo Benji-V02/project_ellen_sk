@@ -11,5 +11,6 @@ public class WinningObserver extends Observer {
 	public void update() {
 		enemiesRemaining--;
 		if (enemiesRemaining == 0)
+			spawner.winning();
 	}
 }
