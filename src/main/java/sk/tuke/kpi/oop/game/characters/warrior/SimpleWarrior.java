@@ -17,6 +17,7 @@ import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Enemy;
 import sk.tuke.kpi.oop.game.characters.Health;
+import sk.tuke.kpi.oop.game.items.Energy;
 
 public class SimpleWarrior extends AbstractActor implements Movable, Alive, Enemy, Warrior {
 
@@ -65,6 +66,7 @@ public class SimpleWarrior extends AbstractActor implements Movable, Alive, Enem
 			)).scheduleFor(this);
 		getHealth().onExhaustion(() -> {
 			scene.getMessageBus().publish(WARRIOR_DIED, this);
+			scene.addActor(new Energy(), getPosX(), getPosY());
 			scene.removeActor(this);
 		});
 		if (behaviour != null) {

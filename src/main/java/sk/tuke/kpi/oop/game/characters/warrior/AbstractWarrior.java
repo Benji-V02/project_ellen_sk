@@ -15,6 +15,7 @@ import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Enemy;
 import sk.tuke.kpi.oop.game.characters.Health;
+import sk.tuke.kpi.oop.game.items.Ammo;
 
 public abstract class AbstractWarrior extends AbstractActor implements Warrior, Movable, Alive, Enemy {
 
@@ -51,6 +52,7 @@ public abstract class AbstractWarrior extends AbstractActor implements Warrior, 
 			)).scheduleFor(this);
 		getHealth().onExhaustion(() -> {
 			scene.getMessageBus().publish(WARRIOR_DIED, this);
+			scene.addActor(new Ammo(), this.getPosX(), this.getPosY());
 			scene.removeActor(this);
 		});
 		if (behaviour != null) {
